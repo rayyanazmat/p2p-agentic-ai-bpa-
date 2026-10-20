@@ -1,0 +1,2498 @@
+{
+  "manifest_version": "1.0",
+  "dataset": "synthetic_fixture_not_BPI_2019",
+  "seed": 2019,
+  "case_count": 100,
+  "cases": [
+    {
+      "case_id": "SYN-001",
+      "po_item_id": "PO-001-10",
+      "invoice_id": "INV-001",
+      "po_quantity": 10.0,
+      "po_amount": 101.0,
+      "invoice_amount": 101.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-002",
+      "po_item_id": "PO-002-10",
+      "invoice_id": "INV-002",
+      "po_quantity": 10.0,
+      "po_amount": 102.0,
+      "invoice_amount": 102.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-003",
+      "po_item_id": "PO-003-10",
+      "invoice_id": "INV-003",
+      "po_quantity": 10.0,
+      "po_amount": 103.0,
+      "invoice_amount": 103.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-004",
+      "po_item_id": "PO-004-10",
+      "invoice_id": "INV-004",
+      "po_quantity": 10.0,
+      "po_amount": 104.0,
+      "invoice_amount": 104.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-005",
+      "po_item_id": "PO-005-10",
+      "invoice_id": "INV-005",
+      "po_quantity": 10.0,
+      "po_amount": 105.0,
+      "invoice_amount": 105.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-006",
+      "po_item_id": "PO-006-10",
+      "invoice_id": "INV-006",
+      "po_quantity": 10.0,
+      "po_amount": 106.0,
+      "invoice_amount": 106.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-007",
+      "po_item_id": "PO-007-10",
+      "invoice_id": "INV-007",
+      "po_quantity": 10.0,
+      "po_amount": 107.0,
+      "invoice_amount": 107.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-008",
+      "po_item_id": "PO-008-10",
+      "invoice_id": "INV-008",
+      "po_quantity": 10.0,
+      "po_amount": 108.0,
+      "invoice_amount": 108.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-009",
+      "po_item_id": "PO-009-10",
+      "invoice_id": "INV-009",
+      "po_quantity": 10.0,
+      "po_amount": 109.0,
+      "invoice_amount": 109.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-010",
+      "po_item_id": "PO-010-10",
+      "invoice_id": "INV-010",
+      "po_quantity": 10.0,
+      "po_amount": 110.0,
+      "invoice_amount": 110.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-011",
+      "po_item_id": "PO-011-10",
+      "invoice_id": "INV-011",
+      "po_quantity": 10.0,
+      "po_amount": 111.0,
+      "invoice_amount": 111.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-012",
+      "po_item_id": "PO-012-10",
+      "invoice_id": "INV-012",
+      "po_quantity": 10.0,
+      "po_amount": 112.0,
+      "invoice_amount": 112.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-013",
+      "po_item_id": "PO-013-10",
+      "invoice_id": "INV-013",
+      "po_quantity": 10.0,
+      "po_amount": 113.0,
+      "invoice_amount": 113.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-014",
+      "po_item_id": "PO-014-10",
+      "invoice_id": "INV-014",
+      "po_quantity": 10.0,
+      "po_amount": 114.0,
+      "invoice_amount": 114.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-015",
+      "po_item_id": "PO-015-10",
+      "invoice_id": "INV-015",
+      "po_quantity": 10.0,
+      "po_amount": 115.0,
+      "invoice_amount": 115.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-016",
+      "po_item_id": "PO-016-10",
+      "invoice_id": "INV-016",
+      "po_quantity": 10.0,
+      "po_amount": 116.0,
+      "invoice_amount": 116.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-017",
+      "po_item_id": "PO-017-10",
+      "invoice_id": "INV-017",
+      "po_quantity": 10.0,
+      "po_amount": 117.0,
+      "invoice_amount": 117.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-018",
+      "po_item_id": "PO-018-10",
+      "invoice_id": "INV-018",
+      "po_quantity": 10.0,
+      "po_amount": 118.0,
+      "invoice_amount": 118.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-019",
+      "po_item_id": "PO-019-10",
+      "invoice_id": "INV-019",
+      "po_quantity": 10.0,
+      "po_amount": 119.0,
+      "invoice_amount": 119.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-020",
+      "po_item_id": "PO-020-10",
+      "invoice_id": "INV-020",
+      "po_quantity": 10.0,
+      "po_amount": 120.0,
+      "invoice_amount": 120.0,
+      "currency": "USD",
+      "matching_type": "two_way",
+      "category": "two_way",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-021",
+      "po_item_id": "PO-021-10",
+      "invoice_id": "INV-021",
+      "po_quantity": 10.0,
+      "po_amount": 121.0,
+      "invoice_amount": 121.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-021-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-022",
+      "po_item_id": "PO-022-10",
+      "invoice_id": "INV-022",
+      "po_quantity": 10.0,
+      "po_amount": 122.0,
+      "invoice_amount": 122.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-022-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-023",
+      "po_item_id": "PO-023-10",
+      "invoice_id": "INV-023",
+      "po_quantity": 10.0,
+      "po_amount": 123.0,
+      "invoice_amount": 123.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-023-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-024",
+      "po_item_id": "PO-024-10",
+      "invoice_id": "INV-024",
+      "po_quantity": 10.0,
+      "po_amount": 124.0,
+      "invoice_amount": 124.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-024-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-025",
+      "po_item_id": "PO-025-10",
+      "invoice_id": "INV-025",
+      "po_quantity": 10.0,
+      "po_amount": 125.0,
+      "invoice_amount": 125.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-025-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-026",
+      "po_item_id": "PO-026-10",
+      "invoice_id": "INV-026",
+      "po_quantity": 10.0,
+      "po_amount": 126.0,
+      "invoice_amount": 126.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-026-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-027",
+      "po_item_id": "PO-027-10",
+      "invoice_id": "INV-027",
+      "po_quantity": 10.0,
+      "po_amount": 127.0,
+      "invoice_amount": 127.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-027-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-028",
+      "po_item_id": "PO-028-10",
+      "invoice_id": "INV-028",
+      "po_quantity": 10.0,
+      "po_amount": 128.0,
+      "invoice_amount": 128.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-028-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-029",
+      "po_item_id": "PO-029-10",
+      "invoice_id": "INV-029",
+      "po_quantity": 10.0,
+      "po_amount": 129.0,
+      "invoice_amount": 129.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-029-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-030",
+      "po_item_id": "PO-030-10",
+      "invoice_id": "INV-030",
+      "po_quantity": 10.0,
+      "po_amount": 130.0,
+      "invoice_amount": 130.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-030-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-031",
+      "po_item_id": "PO-031-10",
+      "invoice_id": "INV-031",
+      "po_quantity": 10.0,
+      "po_amount": 131.0,
+      "invoice_amount": 131.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-031-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-032",
+      "po_item_id": "PO-032-10",
+      "invoice_id": "INV-032",
+      "po_quantity": 10.0,
+      "po_amount": 132.0,
+      "invoice_amount": 132.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-032-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-033",
+      "po_item_id": "PO-033-10",
+      "invoice_id": "INV-033",
+      "po_quantity": 10.0,
+      "po_amount": 133.0,
+      "invoice_amount": 133.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-033-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-034",
+      "po_item_id": "PO-034-10",
+      "invoice_id": "INV-034",
+      "po_quantity": 10.0,
+      "po_amount": 134.0,
+      "invoice_amount": 134.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-034-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-035",
+      "po_item_id": "PO-035-10",
+      "invoice_id": "INV-035",
+      "po_quantity": 10.0,
+      "po_amount": 135.0,
+      "invoice_amount": 135.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-035-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-036",
+      "po_item_id": "PO-036-10",
+      "invoice_id": "INV-036",
+      "po_quantity": 10.0,
+      "po_amount": 136.0,
+      "invoice_amount": 136.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-036-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-037",
+      "po_item_id": "PO-037-10",
+      "invoice_id": "INV-037",
+      "po_quantity": 10.0,
+      "po_amount": 137.0,
+      "invoice_amount": 137.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-037-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-038",
+      "po_item_id": "PO-038-10",
+      "invoice_id": "INV-038",
+      "po_quantity": 10.0,
+      "po_amount": 138.0,
+      "invoice_amount": 138.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-038-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-039",
+      "po_item_id": "PO-039-10",
+      "invoice_id": "INV-039",
+      "po_quantity": 10.0,
+      "po_amount": 139.0,
+      "invoice_amount": 139.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-039-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-040",
+      "po_item_id": "PO-040-10",
+      "invoice_id": "INV-040",
+      "po_quantity": 10.0,
+      "po_amount": 140.0,
+      "invoice_amount": 140.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_complete",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-040-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-041",
+      "po_item_id": "PO-041-10",
+      "invoice_id": "INV-041",
+      "po_quantity": 10.0,
+      "po_amount": 141.0,
+      "invoice_amount": 141.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-041-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-042",
+      "po_item_id": "PO-042-10",
+      "invoice_id": "INV-042",
+      "po_quantity": 10.0,
+      "po_amount": 142.0,
+      "invoice_amount": 142.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-042-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-043",
+      "po_item_id": "PO-043-10",
+      "invoice_id": "INV-043",
+      "po_quantity": 10.0,
+      "po_amount": 143.0,
+      "invoice_amount": 143.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-043-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-044",
+      "po_item_id": "PO-044-10",
+      "invoice_id": "INV-044",
+      "po_quantity": 10.0,
+      "po_amount": 144.0,
+      "invoice_amount": 144.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-044-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-045",
+      "po_item_id": "PO-045-10",
+      "invoice_id": "INV-045",
+      "po_quantity": 10.0,
+      "po_amount": 145.0,
+      "invoice_amount": 145.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-045-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-046",
+      "po_item_id": "PO-046-10",
+      "invoice_id": "INV-046",
+      "po_quantity": 10.0,
+      "po_amount": 146.0,
+      "invoice_amount": 146.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-046-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-047",
+      "po_item_id": "PO-047-10",
+      "invoice_id": "INV-047",
+      "po_quantity": 10.0,
+      "po_amount": 147.0,
+      "invoice_amount": 147.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-047-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-048",
+      "po_item_id": "PO-048-10",
+      "invoice_id": "INV-048",
+      "po_quantity": 10.0,
+      "po_amount": 148.0,
+      "invoice_amount": 148.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-048-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-049",
+      "po_item_id": "PO-049-10",
+      "invoice_id": "INV-049",
+      "po_quantity": 10.0,
+      "po_amount": 149.0,
+      "invoice_amount": 149.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-049-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-050",
+      "po_item_id": "PO-050-10",
+      "invoice_id": "INV-050",
+      "po_quantity": 10.0,
+      "po_amount": 150.0,
+      "invoice_amount": 150.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-050-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-051",
+      "po_item_id": "PO-051-10",
+      "invoice_id": "INV-051",
+      "po_quantity": 10.0,
+      "po_amount": 151.0,
+      "invoice_amount": 151.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-051-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-052",
+      "po_item_id": "PO-052-10",
+      "invoice_id": "INV-052",
+      "po_quantity": 10.0,
+      "po_amount": 152.0,
+      "invoice_amount": 152.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-052-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-053",
+      "po_item_id": "PO-053-10",
+      "invoice_id": "INV-053",
+      "po_quantity": 10.0,
+      "po_amount": 153.0,
+      "invoice_amount": 153.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-053-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-054",
+      "po_item_id": "PO-054-10",
+      "invoice_id": "INV-054",
+      "po_quantity": 10.0,
+      "po_amount": 154.0,
+      "invoice_amount": 154.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-054-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-055",
+      "po_item_id": "PO-055-10",
+      "invoice_id": "INV-055",
+      "po_quantity": 10.0,
+      "po_amount": 155.0,
+      "invoice_amount": 155.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-055-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-056",
+      "po_item_id": "PO-056-10",
+      "invoice_id": "INV-056",
+      "po_quantity": 10.0,
+      "po_amount": 156.0,
+      "invoice_amount": 156.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-056-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-057",
+      "po_item_id": "PO-057-10",
+      "invoice_id": "INV-057",
+      "po_quantity": 10.0,
+      "po_amount": 157.0,
+      "invoice_amount": 157.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-057-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-058",
+      "po_item_id": "PO-058-10",
+      "invoice_id": "INV-058",
+      "po_quantity": 10.0,
+      "po_amount": 158.0,
+      "invoice_amount": 158.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-058-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-059",
+      "po_item_id": "PO-059-10",
+      "invoice_id": "INV-059",
+      "po_quantity": 10.0,
+      "po_amount": 159.0,
+      "invoice_amount": 159.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-059-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-060",
+      "po_item_id": "PO-060-10",
+      "invoice_id": "INV-060",
+      "po_quantity": 10.0,
+      "po_amount": 160.0,
+      "invoice_amount": 160.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "three_way_missing_gr",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-060-1",
+          "quantity": 4.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-061",
+      "po_item_id": "PO-061-10",
+      "invoice_id": "INV-061",
+      "po_quantity": 10.0,
+      "po_amount": 161.0,
+      "invoice_amount": 161.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-061-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-062",
+      "po_item_id": "PO-062-10",
+      "invoice_id": "INV-062",
+      "po_quantity": 10.0,
+      "po_amount": 162.0,
+      "invoice_amount": 162.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-062-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-063",
+      "po_item_id": "PO-063-10",
+      "invoice_id": "INV-063",
+      "po_quantity": 10.0,
+      "po_amount": 163.0,
+      "invoice_amount": 163.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-063-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-064",
+      "po_item_id": "PO-064-10",
+      "invoice_id": "INV-064",
+      "po_quantity": 10.0,
+      "po_amount": 164.0,
+      "invoice_amount": 164.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-064-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-065",
+      "po_item_id": "PO-065-10",
+      "invoice_id": "INV-065",
+      "po_quantity": 10.0,
+      "po_amount": 165.0,
+      "invoice_amount": 165.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-065-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-066",
+      "po_item_id": "PO-066-10",
+      "invoice_id": "INV-066",
+      "po_quantity": 10.0,
+      "po_amount": 166.0,
+      "invoice_amount": 166.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-066-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-067",
+      "po_item_id": "PO-067-10",
+      "invoice_id": "INV-067",
+      "po_quantity": 10.0,
+      "po_amount": 167.0,
+      "invoice_amount": 167.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-067-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-068",
+      "po_item_id": "PO-068-10",
+      "invoice_id": "INV-068",
+      "po_quantity": 10.0,
+      "po_amount": 168.0,
+      "invoice_amount": 168.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-068-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-069",
+      "po_item_id": "PO-069-10",
+      "invoice_id": "INV-069",
+      "po_quantity": 10.0,
+      "po_amount": 169.0,
+      "invoice_amount": 169.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-069-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-070",
+      "po_item_id": "PO-070-10",
+      "invoice_id": "INV-070",
+      "po_quantity": 10.0,
+      "po_amount": 170.0,
+      "invoice_amount": 170.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-070-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-071",
+      "po_item_id": "PO-071-10",
+      "invoice_id": "INV-071",
+      "po_quantity": 10.0,
+      "po_amount": 171.0,
+      "invoice_amount": 171.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-071-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-072",
+      "po_item_id": "PO-072-10",
+      "invoice_id": "INV-072",
+      "po_quantity": 10.0,
+      "po_amount": 172.0,
+      "invoice_amount": 172.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-072-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-073",
+      "po_item_id": "PO-073-10",
+      "invoice_id": "INV-073",
+      "po_quantity": 10.0,
+      "po_amount": 173.0,
+      "invoice_amount": 173.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-073-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-074",
+      "po_item_id": "PO-074-10",
+      "invoice_id": "INV-074",
+      "po_quantity": 10.0,
+      "po_amount": 174.0,
+      "invoice_amount": 174.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-074-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-075",
+      "po_item_id": "PO-075-10",
+      "invoice_id": "INV-075",
+      "po_quantity": 10.0,
+      "po_amount": 175.0,
+      "invoice_amount": 175.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-075-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-076",
+      "po_item_id": "PO-076-10",
+      "invoice_id": "INV-076",
+      "po_quantity": 10.0,
+      "po_amount": 176.0,
+      "invoice_amount": 176.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-076-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-077",
+      "po_item_id": "PO-077-10",
+      "invoice_id": "INV-077",
+      "po_quantity": 10.0,
+      "po_amount": 177.0,
+      "invoice_amount": 177.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-077-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-078",
+      "po_item_id": "PO-078-10",
+      "invoice_id": "INV-078",
+      "po_quantity": 10.0,
+      "po_amount": 178.0,
+      "invoice_amount": 178.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-078-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-079",
+      "po_item_id": "PO-079-10",
+      "invoice_id": "INV-079",
+      "po_quantity": 10.0,
+      "po_amount": 179.0,
+      "invoice_amount": 179.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-079-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-080",
+      "po_item_id": "PO-080-10",
+      "invoice_id": "INV-080",
+      "po_quantity": 10.0,
+      "po_amount": 180.0,
+      "invoice_amount": 180.0,
+      "currency": "USD",
+      "matching_type": "consignment",
+      "category": "consignment",
+      "fault": null,
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-080-1",
+          "quantity": 10.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "cleared"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-081",
+      "po_item_id": "PO-081-10",
+      "invoice_id": "INV-081",
+      "po_quantity": 10.0,
+      "po_amount": 181.0,
+      "invoice_amount": 181.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "unverified_invoice",
+      "invoice_verified": false,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-082",
+      "po_item_id": "PO-082-10",
+      "invoice_id": "INV-082",
+      "po_quantity": 10.0,
+      "po_amount": 182.0,
+      "invoice_amount": 182.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "duplicate_invoice",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": true,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-083",
+      "po_item_id": "PO-083-10",
+      "invoice_id": "INV-083",
+      "po_quantity": 10.0,
+      "po_amount": 183.0,
+      "invoice_amount": 190.25,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "amount_mismatch",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-084",
+      "po_item_id": "PO-084-10",
+      "invoice_id": "INV-084",
+      "po_quantity": 10.0,
+      "po_amount": 184.0,
+      "invoice_amount": 184.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "incomplete_receipt",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-084-F",
+          "quantity": 2.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-085",
+      "po_item_id": "PO-085-10",
+      "invoice_id": "INV-085",
+      "po_quantity": 10.0,
+      "po_amount": 185.0,
+      "invoice_amount": 185.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "incomplete_receipt",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-085-F",
+          "quantity": 2.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-086",
+      "po_item_id": "PO-086-10",
+      "invoice_id": "INV-086",
+      "po_quantity": 10.0,
+      "po_amount": 186.0,
+      "invoice_amount": 186.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "incomplete_receipt",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-086-F",
+          "quantity": 2.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-087",
+      "po_item_id": "PO-087-10",
+      "invoice_id": "INV-087",
+      "po_quantity": 10.0,
+      "po_amount": 187.0,
+      "invoice_amount": 194.25,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "amount_mismatch",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-088",
+      "po_item_id": "PO-088-10",
+      "invoice_id": "INV-088",
+      "po_quantity": 10.0,
+      "po_amount": 188.0,
+      "invoice_amount": 188.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "unverified_invoice",
+      "invoice_verified": false,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-089",
+      "po_item_id": "PO-089-10",
+      "invoice_id": "INV-089",
+      "po_quantity": 10.0,
+      "po_amount": 189.0,
+      "invoice_amount": 189.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "duplicate_invoice",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": true,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-090",
+      "po_item_id": "PO-090-10",
+      "invoice_id": "INV-090",
+      "po_quantity": 10.0,
+      "po_amount": 190.0,
+      "invoice_amount": 190.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "incomplete_receipt",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-090-F",
+          "quantity": 2.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-091",
+      "po_item_id": "PO-091-10",
+      "invoice_id": "INV-091",
+      "po_quantity": 10.0,
+      "po_amount": 191.0,
+      "invoice_amount": 198.25,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "amount_mismatch",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-092",
+      "po_item_id": "PO-092-10",
+      "invoice_id": "INV-092",
+      "po_quantity": 10.0,
+      "po_amount": 192.0,
+      "invoice_amount": 199.25,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "amount_mismatch",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-093",
+      "po_item_id": "PO-093-10",
+      "invoice_id": "INV-093",
+      "po_quantity": 10.0,
+      "po_amount": 193.0,
+      "invoice_amount": 193.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "unverified_invoice",
+      "invoice_verified": false,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-094",
+      "po_item_id": "PO-094-10",
+      "invoice_id": "INV-094",
+      "po_quantity": 10.0,
+      "po_amount": 194.0,
+      "invoice_amount": 194.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "duplicate_invoice",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": true,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-095",
+      "po_item_id": "PO-095-10",
+      "invoice_id": "INV-095",
+      "po_quantity": 10.0,
+      "po_amount": 195.0,
+      "invoice_amount": 195.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "unverified_invoice",
+      "invoice_verified": false,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-096",
+      "po_item_id": "PO-096-10",
+      "invoice_id": "INV-096",
+      "po_quantity": 10.0,
+      "po_amount": 196.0,
+      "invoice_amount": 196.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "unverified_invoice",
+      "invoice_verified": false,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-097",
+      "po_item_id": "PO-097-10",
+      "invoice_id": "INV-097",
+      "po_quantity": 10.0,
+      "po_amount": 197.0,
+      "invoice_amount": 197.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "incomplete_receipt",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [
+        {
+          "event_id": "GR-097-F",
+          "quantity": 2.0,
+          "verified": false
+        }
+      ],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-098",
+      "po_item_id": "PO-098-10",
+      "invoice_id": "INV-098",
+      "po_quantity": 10.0,
+      "po_amount": 198.0,
+      "invoice_amount": 198.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "duplicate_invoice",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": true,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-099",
+      "po_item_id": "PO-099-10",
+      "invoice_id": "INV-099",
+      "po_quantity": 10.0,
+      "po_amount": 199.0,
+      "invoice_amount": 199.0,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "duplicate_invoice",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": true,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "SYN-100",
+      "po_item_id": "PO-100-10",
+      "invoice_id": "INV-100",
+      "po_quantity": 10.0,
+      "po_amount": 200.0,
+      "invoice_amount": 207.25,
+      "currency": "USD",
+      "matching_type": "three_way",
+      "category": "fault_injected",
+      "fault": "amount_mismatch",
+      "invoice_verified": true,
+      "invoice_status": "open",
+      "po_status": "open",
+      "receipt_events": [],
+      "duplicate_invoice": false,
+      "expected_state": {
+        "invoice_status": "held"
+      },
+      "synthetic": true
+    }
+  ]
+}
