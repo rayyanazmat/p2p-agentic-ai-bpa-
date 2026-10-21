@@ -111,7 +111,7 @@ python main.py --build-bpi-fixture
 python main.py --run-bpi-baseline --cases 100
 ```
 
-The BPI manifest has already been used for a baseline smoke run. Do not continue to call it an untouched holdout; reserve a new PO-document-disjoint subset for confirmatory testing and record its manifest hash before tuning.
+The current BPI manifest SHA-256 is `286c996aeb8622c1ab3c9dceb4ea841017c55344c571037d43bae67b39cc17bb`. It has already been used for baseline smoke runs. Do not continue to call it an untouched holdout; reserve a new PO-document-disjoint subset for confirmatory testing and record its manifest hash before tuning.
 
 The **synthetic** fixture tests code paths only. It is not drawn from BPI Challenge 2019 and does not support claims about real business frequencies or real-log generalization. For the BPI replay manifest, the checked-in `src/pipeline/bpi.py` parser was run against the locally acquired XES. The manifest is trace-derived but not transaction-level ground truth: reconstructed fields and conservative hold labels limit conclusions. Split by parent PO document to prevent item-level leakage.
 
