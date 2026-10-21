@@ -72,6 +72,14 @@ class SeedCase(StrictModel):
     duplicate_invoice: bool = False
     expected_state: dict[str, str]
     synthetic: bool = True
+    source_dataset: str | None = None
+    source_case_id: str | None = None
+    source_purchasing_document: str | None = None
+    source_item_category: str | None = None
+    source_activities: list[str] = Field(default_factory=list)
+    source_event_counts: dict[str, int] = Field(default_factory=dict)
+    source_cumulative_net_worth_eur: float | None = None
+    normalization_note: str | None = None
 
 
 class ApprovalRequest(StrictModel):

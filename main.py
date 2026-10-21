@@ -13,11 +13,19 @@ from typing import Any
 
 import uvicorn
 
-from config import API_BASE_URL, MANIFEST_PATH, PROCESSED_DIR, RUN_CASE_LIMIT
+from config import (
+    API_BASE_URL,
+    BPI_LOG_PATH,
+    BPI_MANIFEST_PATH,
+    MANIFEST_PATH,
+    PROCESSED_DIR,
+    RUN_CASE_LIMIT,
+)
 from src.agents.heuristic_agent import HeuristicAgent
 from src.agents.react_agent import ReActAgent, ToolClient
 from src.evaluation.evaluator import Evaluator
 from src.pipeline.loader import generate_manifest, load_manifest
+from src.pipeline.bpi import profile_and_build_manifest
 
 
 def wait_for_api(base_url: str, process: subprocess.Popen[Any] | None = None) -> None:
@@ -84,11 +92,24 @@ def print_summary(summary: dict[str, Any]) -> None:
         print(f"  ({additional} additional case traces in JSON log)")
 
 
-def run_baselines(limit: int | None) -> list[dict[str, Any]]:
+def run_baselines(
+    limit: int | None,
+    manifest_path: Path = MANIFEST_PATH,
+    output_name: str = "baseline_run.json",
+) -> list[dict[str, Any]]:
     """Start simulator, execute both baselines, save metrics, and stop service."""
-    if not MANIFEST_PATH.exists():
-        generate_manifest(MANIFEST_PATH)
-    cases = load_manifest(MANIFEST_PATH)
+    if not manifest_path.exists():
+        if manifest_path == MANIFEST_PATH:
+            generate_manifest(MANIFEST_PATH)
+        elif manifest_path == BPI_MANIFEST_PATH:
+            if not BPI_LOG_PATH.exists():
+                raise FileNotFoundError(
+                    f"BPI XES not found at {BPI_LOG_PATH}; acquire it first"
+                )
+            profile_and_build_manifest(BPI_LOG_PATH, BPI_MANIFEST_PATH)
+        else:
+            raise FileNotFoundError(f"Evaluation manifest not found: {manifest_path}")
+    cases = load_manifest(manifest_path)
     selected = cases if limit is None else sample_cases(cases, limit)
     base_url = API_BASE_URL
     host = base_url.split("//", 1)[-1].split(":", 1)[0]
@@ -123,9 +144,9 @@ def run_baselines(limit: int | None) -> list[dict[str, Any]]:
             evaluator.run("Baseline 1 — ReAct", selected, ReActAgent),
             evaluator.run("Baseline 2 — Heuristic", selected, HeuristicAgent),
         ]
-        output_path = PROCESSED_DIR / "baseline_run.json"
+        output_path = PROCESSED_DIR / output_name
         Evaluator.save(summaries, output_path)
-        print(f"Manifest: {MANIFEST_PATH}")
+        print(f"Manifest: {manifest_path}")
         print(f"Detailed tool logs and metrics: {output_path}")
         for summary in summaries:
             print_summary(summary)
@@ -152,6 +173,16 @@ def parse_args() -> argparse.Namespace:
         help="regenerate the synthetic 100-case fixture",
     )
     parser.add_argument(
+        "--build-bpi-fixture",
+        action="store_true",
+        help="profile BPI XES and create a trace-derived 100-case fixture",
+    )
+    parser.add_argument(
+        "--run-bpi-baseline",
+        action="store_true",
+        help="run both baselines on the BPI trace-derived fixture",
+    )
+    parser.add_argument(
         "--cases", type=int, default=RUN_CASE_LIMIT,
         help="number of cases (default: balanced sample; use 100 for full fixture)",
     )
@@ -169,6 +200,18 @@ def main() -> None:
     elif args.run_baseline:
         limit = None if args.cases <= 0 or args.cases >= 100 else args.cases
         run_baselines(limit)
+    elif args.build_bpi_fixture:
+        profile, manifest = profile_and_build_manifest(
+            BPI_LOG_PATH, BPI_MANIFEST_PATH
+        )
+        print(f"Parsed {profile['trace_count']} BPI traces / {profile['event_count']} events")
+        print(f"Category counts: {profile['matching_category_case_counts']}")
+        print(f"Simple-case candidates: {profile['simple_replay_eligible_counts']}")
+        print(f"Built {manifest['case_count']} cases at {BPI_MANIFEST_PATH}")
+        print(f"Full profile: {PROCESSED_DIR / 'bpi_profile.json'}")
+    elif args.run_bpi_baseline:
+        limit = None if args.cases <= 0 or args.cases >= 100 else args.cases
+        run_baselines(limit, BPI_MANIFEST_PATH, "bpi_baseline_run.json")
     elif not args.generate_manifest:
         print("Choose --serve, --run-baseline, or --generate-manifest.")
 

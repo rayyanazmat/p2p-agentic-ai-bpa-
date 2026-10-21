@@ -1,9 +1,4 @@
-"""Synthetic P2P seed generation and lightweight XES/CSV parsing.
-
-The generated manifest is an engineering fixture, not a sample of BPI
-Challenge 2019. Real-log-derived scenario construction requires the original
-dataset and a separately reviewed policy oracle.
-"""
+"""Synthetic seed generation and event-log parsing for P2P experiments."""
 
 from __future__ import annotations
 
@@ -13,7 +8,7 @@ import random
 import xml.etree.ElementTree as ET
 from collections import defaultdict
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 
 
 SEED = 2019
@@ -126,41 +121,57 @@ def load_manifest(path: Path) -> list[dict[str, Any]]:
     return cases
 
 
-def parse_xes(path: Path) -> list[dict[str, Any]]:
-    """Parse XES traces into case IDs, attributes, and ordered activity names."""
-    root = ET.parse(path).getroot()
-    parsed: list[dict[str, Any]] = []
-    for trace in (node for node in root.iter() if node.tag.endswith("trace")):
+def _xes_attributes(element: ET.Element) -> dict[str, str]:
+    """Extract typed XES attribute elements as string values."""
+    return {
+        item.attrib.get("key", ""): item.attrib.get("value", "")
+        for item in element
+        if item.attrib.get("key")
+    }
+
+
+def iter_xes(path: Path) -> Iterator[dict[str, Any]]:
+    """Yield XES traces incrementally to keep large logs within memory limits."""
+    context = ET.iterparse(path, events=("start", "end"))
+    _, root = next(context)
+    for event, trace in context:
+        if event != "end" or not trace.tag.endswith("trace"):
+            continue
         attributes: dict[str, str] = {}
         activities: list[str] = []
         events: list[dict[str, str]] = []
         case_id = ""
         for child in trace:
-            key = child.attrib.get("key", "")
-            value = child.attrib.get("value", "")
             if child.tag.endswith("event"):
-                event_values = {
-                    item.attrib.get("key", ""): item.attrib.get("value", "")
-                    for item in child
-                }
+                event_values = _xes_attributes(child)
                 activity = event_values.get("concept:name")
                 if activity:
                     activities.append(activity)
                 events.append(event_values)
-            elif key:
+            elif child.attrib.get("key"):
+                key = child.attrib["key"]
+                value = child.attrib.get("value", "")
                 attributes[key] = value
                 if key in {"concept:name", "case:concept:name"}:
                     case_id = value
         if case_id:
-            parsed.append(
-                {
-                    "case_id": case_id,
-                    "attributes": attributes,
-                    "activities": activities,
-                    "events": events,
-                }
-            )
-    return parsed
+            yield {
+                "case_id": case_id,
+                "attributes": attributes,
+                "activities": activities,
+                "events": events,
+            }
+        trace.clear()
+        root.clear()
+
+
+def parse_xes(path: Path) -> list[dict[str, Any]]:
+    """Parse XES traces into case IDs, attributes, and ordered activity names.
+
+    This convenience function materializes the whole log. Use ``iter_xes``
+    for large files such as BPI Challenge 2019.
+    """
+    return list(iter_xes(path))
 
 
 def parse_csv(path: Path) -> list[dict[str, Any]]:
@@ -247,6 +258,18 @@ def build_seed_state(normalized_case: dict[str, Any]) -> dict[str, Any]:
             "expected_state", {"invoice_status": "held"}
         ),
         "synthetic": bool(normalized_case.get("synthetic", False)),
+        "source_dataset": normalized_case.get("source_dataset"),
+        "source_case_id": normalized_case.get("source_case_id"),
+        "source_purchasing_document": normalized_case.get(
+            "source_purchasing_document"
+        ),
+        "source_item_category": normalized_case.get("source_item_category"),
+        "source_activities": normalized_case.get("source_activities", []),
+        "source_event_counts": normalized_case.get("source_event_counts", {}),
+        "source_cumulative_net_worth_eur": normalized_case.get(
+            "source_cumulative_net_worth_eur"
+        ),
+        "normalization_note": normalized_case.get("normalization_note"),
     }
     if case["expected_state"].get("invoice_status") not in {"cleared", "held"}:
         raise ValueError("expected_state.invoice_status must be cleared or held")

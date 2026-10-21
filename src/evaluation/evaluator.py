@@ -73,7 +73,7 @@ class Evaluator:
             input_tokens = int(run.get("input_tokens", 0))
             output_tokens = int(run.get("output_tokens", 0))
             total_tokens += input_tokens + output_tokens
-            if run.get("backend") == "openai-compatible":
+            if run.get("backend") in {"openai-compatible", "ollama-local"}:
                 has_hosted_model = True
                 hosted_input_tokens += input_tokens
                 hosted_output_tokens += output_tokens
@@ -92,7 +92,9 @@ class Evaluator:
         count = len(cases)
         input_rate = os.getenv("OPENAI_INPUT_USD_PER_MILLION")
         output_rate = os.getenv("OPENAI_OUTPUT_USD_PER_MILLION")
-        if not has_hosted_model:
+        backends = {run["agent"].get("backend") for run in runs}
+        has_local_model = backends == {"ollama-local"}
+        if has_local_model or not has_hosted_model:
             cost_per_case: float | None = 0.0
         elif input_rate is not None and output_rate is not None:
             total_cost = (

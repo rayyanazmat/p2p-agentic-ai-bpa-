@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import time
+from threading import Lock
 import urllib.error
 import urllib.request
 from typing import Any, Protocol
@@ -13,6 +14,12 @@ from pydantic import BaseModel, ConfigDict, ValidationError
 from config import (
     AGENT_MAX_TURNS,
     API_BASE_URL,
+    MODEL_CALL_BUDGET,
+    MODEL_PROVIDER,
+    OLLAMA_BASE_URL,
+    OLLAMA_MODEL,
+    OLLAMA_NUM_CTX,
+    OLLAMA_NUM_THREADS,
     OPENAI_API_KEY,
     OPENAI_BASE_URL,
     OPENAI_MODEL,
@@ -175,18 +182,29 @@ class OfflineBackend:
 
 
 class OpenAICompatibleBackend:
-    """Optional OpenAI-compatible backend with JSON-object output parsing."""
+    """OpenAI-compatible hosted or local model backend with structured output."""
 
     name = "openai-compatible"
 
     def __init__(self) -> None:
-        if not OPENAI_API_KEY:
-            raise RuntimeError("OPENAI_API_KEY is required for the hosted backend")
         from openai import OpenAI
 
-        kwargs: dict[str, Any] = {"api_key": OPENAI_API_KEY}
-        if OPENAI_BASE_URL:
-            kwargs["base_url"] = OPENAI_BASE_URL
+        if MODEL_PROVIDER == "ollama":
+            self.name = "ollama-local"
+            self.model = OLLAMA_MODEL
+            kwargs: dict[str, Any] = {
+                "api_key": "ollama",
+                "base_url": OLLAMA_BASE_URL,
+            }
+        else:
+            if not OPENAI_API_KEY:
+                raise RuntimeError(
+                    "OPENAI_API_KEY is required for an OpenAI-compatible provider"
+                )
+            self.model = OPENAI_MODEL
+            kwargs = {"api_key": OPENAI_API_KEY}
+            if OPENAI_BASE_URL:
+                kwargs["base_url"] = OPENAI_BASE_URL
         self.client = OpenAI(**kwargs)
 
     def decide(self, context: dict[str, Any]) -> tuple[Decision, int, int]:
@@ -198,14 +216,60 @@ class OpenAICompatibleBackend:
             "duplicate, amount differs, or required receipt is incomplete. Verify "
             "complete unverified receipts before clearing. Do not claim a tool ran."
         )
+        _reserve_model_call()
+        if MODEL_PROVIDER == "ollama":
+            # Use Ollama's native endpoint: its OpenAI-compatible endpoint can
+            # return Qwen's reasoning channel separately from message.content.
+            payload = {
+                "model": self.model,
+                "messages": [
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": json.dumps(context, sort_keys=True)},
+                ],
+                "format": "json",
+                "stream": False,
+                "think": False,
+                "keep_alive": 0,
+                "options": {
+                    "num_ctx": OLLAMA_NUM_CTX,
+                    "num_thread": OLLAMA_NUM_THREADS,
+                    "num_predict": 128,
+                    "temperature": 0,
+                },
+            }
+            api_url = OLLAMA_BASE_URL.removesuffix("/v1") + "/api/chat"
+            request = urllib.request.Request(
+                api_url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(
+                request, timeout=REQUEST_TIMEOUT_SECONDS * 12
+            ) as http_response:
+                local_response = json.loads(http_response.read().decode("utf-8"))
+            content = local_response.get("message", {}).get("content") or "{}"
+            try:
+                decision = Decision.model_validate_json(content)
+            except (ValidationError, ValueError) as exc:
+                raise ValueError(
+                    f"Model returned invalid structured action: {content}"
+                ) from exc
+            return (
+                decision,
+                int(local_response.get("prompt_eval_count", 0) or 0),
+                int(local_response.get("eval_count", 0) or 0),
+            )
+
         response = self.client.chat.completions.create(
-            model=OPENAI_MODEL,
+            model=self.model,
             messages=[
                 {"role": "system", "content": system},
                 {"role": "user", "content": json.dumps(context, sort_keys=True)},
             ],
             response_format={"type": "json_object"},
             temperature=0,
+            max_tokens=128,
         )
         content = response.choices[0].message.content or "{}"
         try:
@@ -223,10 +287,27 @@ class OpenAICompatibleBackend:
 
 
 def configured_backend() -> DecisionBackend:
-    """Select a hosted provider only when explicitly configured."""
-    if OPENAI_API_KEY:
+    """Select the explicitly configured model; default to the offline baseline."""
+    if MODEL_PROVIDER == "ollama":
+        return OpenAICompatibleBackend()
+    if MODEL_PROVIDER in {"openai", "openai-compatible"} and OPENAI_API_KEY:
         return OpenAICompatibleBackend()
     return OfflineBackend()
+
+
+_model_call_lock = Lock()
+_model_calls_used = 0
+
+
+def _reserve_model_call() -> None:
+    """Enforce one process-wide model-call cap for the complete experiment."""
+    global _model_calls_used
+    with _model_call_lock:
+        if _model_calls_used >= MODEL_CALL_BUDGET:
+            raise RuntimeError(
+                f"Model-call budget exhausted ({MODEL_CALL_BUDGET} calls)"
+            )
+        _model_calls_used += 1
 
 
 class ReActAgent:
@@ -267,7 +348,7 @@ class ReActAgent:
                 state.observations.append({"tool": tool_name, "result": result})
             except ToolError as exc:
                 state.policy_violations.append(f"{tool_name}: {exc.detail}")
-                return self._finish(state, "failed")
+                return self._finish(state, "failed", self.backend.name)
         state.phase = "evidence_retrieved"
 
         for turn in range(self.max_turns):
@@ -282,7 +363,7 @@ class ReActAgent:
                 )
                 state.phase = "held"
                 state.intervention_required = True
-                return self._finish(state, "held")
+                return self._finish(state, "held", self.backend.name)
             state.estimated_input_tokens += input_tokens
             state.estimated_output_tokens += output_tokens
             action = decision.action
@@ -308,15 +389,17 @@ class ReActAgent:
                         case["invoice_id"], f"{case['case_id']}-clear"
                     )
                     state.phase = "cleared"
-                    return self._finish(state, "cleared")
+                    return self._finish(state, "cleared", self.backend.name)
                 if action == "hold":
                     self.client.hold_case(case["case_id"], decision.reason)
                     state.phase = "held"
                     state.intervention_required = True
-                    return self._finish(state, "held")
+                    return self._finish(state, "held", self.backend.name)
                 if action == "done":
                     if state_dict["invoice"]["status"] in {"cleared", "held"}:
-                        return self._finish(state, state_dict["invoice"]["status"])
+                        return self._finish(
+                            state, state_dict["invoice"]["status"], self.backend.name
+                        )
                     state.policy_violations.append(
                         "Planner selected done while invoice remained open"
                     )
@@ -325,7 +408,7 @@ class ReActAgent:
                     )
                     state.phase = "held"
                     state.intervention_required = True
-                    return self._finish(state, "held")
+                    return self._finish(state, "held", self.backend.name)
             except ToolError as exc:
                 state.policy_violations.append(f"{action}: {exc.detail}")
                 state.observations.append(
@@ -351,7 +434,7 @@ class ReActAgent:
                     self.client.hold_case(case["case_id"], exc.detail)
                     state.phase = "held"
                     state.intervention_required = True
-                    return self._finish(state, "held")
+                    return self._finish(state, "held", self.backend.name)
                 if action == "clear":
                     # Reconcile after a lost response before issuing a hold.
                     try:
@@ -360,30 +443,28 @@ class ReActAgent:
                         )
                         if state_dict["invoice"]["status"] == "cleared":
                             state.phase = "cleared"
-                            return self._finish(state, "cleared")
+                            return self._finish(state, "cleared", self.backend.name)
                     except ToolError:
                         pass
                 # A rejected mutation is held rather than retried blindly.
                 self.client.hold_case(case["case_id"], exc.detail)
                 state.phase = "held"
                 state.intervention_required = True
-                return self._finish(state, "held")
+                return self._finish(state, "held", self.backend.name)
         self.client.hold_case(case["case_id"], "Maximum planner turns reached")
         state.phase = "held"
         state.intervention_required = True
-        return self._finish(state, "held")
+        return self._finish(state, "held", self.backend.name)
 
     @staticmethod
-    def _finish(state: AgentState, outcome: str) -> dict[str, Any]:
+    def _finish(
+        state: AgentState, outcome: str, backend_name: str
+    ) -> dict[str, Any]:
         """Serialize the final trace summary."""
         return {
             "case_id": state.case_id,
             "outcome": outcome,
-            "backend": (
-                "openai-compatible"
-                if OPENAI_API_KEY
-                else "offline-scripted-react"
-            ),
+            "backend": backend_name,
             "actions": state.actions,
             "policy_violations": state.policy_violations,
             "intervention_required": state.intervention_required,
