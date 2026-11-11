@@ -128,7 +128,7 @@ Summarize the dataset and generate a paper-friendly appendix snapshot:
 python main.py --dataset-summary
 ```
 
-The CLI starts the local simulator if it is not already running. Results and audit traces are written to `data/processed/baseline_run.json`, while the smoke test writes `data/processed/smoke_test.json`. Ablation runs print a markdown-ready comparison table designed for paper reporting. The archived manuscript in `docs/paper_draft.md` is superseded; use `submission/paper.tex` as the current working source. A compact summary of the saved experiment outputs is in `results/phase2_summary.md`, the machine-readable evidence file is in `results/phase2_evidence.json`, representative success and policy-risk traces are in `logs/`, the working paper source and compiled draft are in `submission/`, and the final submission checklist is in `docs/final_submission_checklist.md`. To start the API separately, run `python main.py --serve`; interactive API documentation is available at `http://127.0.0.1:8000/docs`.
+The CLI starts the local simulator if it is not already running. Results and audit traces are written to `data/processed/baseline_run.json`, while the smoke test writes `data/processed/smoke_test.json`. Ablation runs print a markdown-ready comparison table designed for paper reporting. A compact summary of the saved experiment outputs is in `results/phase2_summary.md`, the machine-readable evidence file is in `results/phase2_evidence.json`, representative success and policy-risk traces are in `logs/`, and the working paper source is in `submission/`. To start the API separately, run `python main.py --serve`; interactive API documentation is available at `http://127.0.0.1:8000/docs`.
 
 ## Optional model backends
 
@@ -182,7 +182,7 @@ The fixture groups cases by purchase-order document to avoid item-level leakage.
 | Transfer to procurement event traces | BPI Challenge 2019 replay | exact match, risk alerts | No like-for-like comparison is recorded | E4 replays 100 trace-derived cases with 1.00 agreement against reconstructed proxy labels and a 0.55 alert rate; this is not invoice ground truth. | Partial |
 | Joint evaluation and reporting | E1–E6 scripts, ablation, logs, manuscript | correctness, safety, oversight, efficiency | E2 is not a base-paper reproduction | Eight-page, 8–10 page-format manuscript includes the rubric sections, gap table, 30 cited sources, and result tables. Group review, AI-use permission confirmation, Turnitin, and final release packaging remain pending. | In progress |
 
-These are deterministic local prototype results, not estimates of production performance. See `docs/rubric_compliance_check.md` for the detailed evidence limits and remaining submission work.
+These are deterministic local prototype results, not estimates of production performance. The E2 experiment is a heuristic comparator, not a reproduction of the selected Declare-translation paper, and BPI-derived results use proxy labels rather than invoice ground truth.
 
 ## Tests
 
