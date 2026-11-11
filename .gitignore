@@ -41,6 +41,7 @@ Phase1_AI4015_22P-0507.pdf
 # Generated or hand-in-only binary exports; keep source files in submission/
 *.pdf
 *.zip
+!submission/paper.pdf
 
 # Generated LaTeX outputs and stale/compiled paper exports
 submission/*.aux

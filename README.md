@@ -128,7 +128,7 @@ Summarize the dataset and generate a paper-friendly appendix snapshot:
 python main.py --dataset-summary
 ```
 
-The CLI starts the local simulator if it is not already running. Results and audit traces are written to `data/processed/baseline_run.json`, while the smoke test writes `data/processed/smoke_test.json`. Ablation runs print a markdown-ready comparison table designed for paper reporting. A compact summary of the saved experiment outputs is in `results/phase2_summary.md`, the machine-readable evidence file is in `results/phase2_evidence.json`, representative success and policy-risk traces are in `logs/`, and the working paper source is in `submission/`. To start the API separately, run `python main.py --serve`; interactive API documentation is available at `http://127.0.0.1:8000/docs`.
+The CLI starts the local simulator if it is not already running. Results and audit traces are written to `data/processed/baseline_run.json`, while the smoke test writes `data/processed/smoke_test.json`. Ablation runs print a markdown-ready comparison table designed for paper reporting. A compact summary of the saved experiment outputs is in `results/phase2_summary.md`, the machine-readable evidence file is in `results/phase2_evidence.json`, representative success and policy-risk traces are in `logs/`, and the paper source and compiled draft are in `submission/`. `submission/paper.pdf` is the last available 8-page draft and predates the latest `paper.tex` edits; recompile before treating it as final. To start the API separately, run `python main.py --serve`; interactive API documentation is available at `http://127.0.0.1:8000/docs`.
 
 ## Optional model backends
 
