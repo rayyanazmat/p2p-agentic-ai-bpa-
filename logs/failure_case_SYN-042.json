@@ -1,0 +1,180 @@
+{
+  "classification": "policy_risk_case",
+  "classification_note": "A detected policy-violation condition. It is not necessarily an end-state mismatch; see the recorded metrics and trajectory.",
+  "source_experiment": "E3_proposed_system",
+  "case": {
+    "case_id": "SYN-042",
+    "po_item_id": "PO-042-10",
+    "invoice_id": "INV-042",
+    "po_quantity": 10.0,
+    "po_amount": 142.0,
+    "invoice_amount": 142.0,
+    "currency": "USD",
+    "matching_type": "three_way",
+    "category": "three_way_missing_gr",
+    "fault": null,
+    "invoice_verified": true,
+    "invoice_status": "open",
+    "po_status": "open",
+    "receipt_events": [
+      {
+        "event_id": "GR-042-1",
+        "quantity": 4.0,
+        "verified": false
+      }
+    ],
+    "duplicate_invoice": false,
+    "expected_state": {
+      "invoice_status": "held"
+    },
+    "synthetic": true
+  },
+  "trajectory": {
+    "case_id": "SYN-042",
+    "expected_status": "held",
+    "actual_status": "held",
+    "exact_match": true,
+    "policy_violation": true,
+    "unsafe_mutation": false,
+    "intervention_required": true,
+    "latency_seconds": 0.0065,
+    "agent": {
+      "case_id": "SYN-042",
+      "outcome": "held",
+      "backend": "offline-scripted-react",
+      "actions": [
+        {
+          "turn": 1,
+          "action": "hold",
+          "reason": "Required receipt quantity is incomplete"
+        }
+      ],
+      "policy_violations": [
+        "incomplete_receipt"
+      ],
+      "intervention_required": true,
+      "input_tokens": 133,
+      "output_tokens": 16,
+      "agent_state": {
+        "case_id": "SYN-042",
+        "po_item_id": "PO-042-10",
+        "invoice_id": "INV-042",
+        "phase": "held",
+        "observations": [
+          {
+            "tool": "get_purchase_order",
+            "result": {
+              "case_id": "SYN-042",
+              "po_item_id": "PO-042-10",
+              "quantity": 10.0,
+              "amount": 142.0,
+              "currency": "USD",
+              "matching_type": "three_way",
+              "status": "open"
+            }
+          },
+          {
+            "tool": "get_invoice",
+            "result": {
+              "case_id": "SYN-042",
+              "invoice_id": "INV-042",
+              "po_item_id": "PO-042-10",
+              "amount": 142.0,
+              "currency": "USD",
+              "verified": true,
+              "duplicate_invoice": false,
+              "status": "open"
+            }
+          },
+          {
+            "tool": "get_goods_receipts",
+            "result": {
+              "po_item_id": "PO-042-10",
+              "receipt_events": [
+                {
+                  "event_id": "GR-042-1",
+                  "quantity": 4.0,
+                  "verified": false,
+                  "received_at": null
+                }
+              ],
+              "verified_quantity": 0.0
+            }
+          }
+        ],
+        "actions": [
+          {
+            "turn": 1,
+            "action": "hold",
+            "reason": "Required receipt quantity is incomplete"
+          }
+        ],
+        "estimated_input_tokens": 133,
+        "estimated_output_tokens": 16,
+        "intervention_required": true,
+        "policy_violations": [
+          "incomplete_receipt"
+        ]
+      }
+    },
+    "audit": {
+      "case_id": "SYN-042",
+      "tool_calls": [
+        {
+          "sequence": 1,
+          "tool": "get_purchase_order",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T18:47:29.847761Z"
+        },
+        {
+          "sequence": 2,
+          "tool": "get_invoice",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T18:47:29.849500Z"
+        },
+        {
+          "sequence": 3,
+          "tool": "get_goods_receipts",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T18:47:29.851045Z"
+        },
+        {
+          "sequence": 4,
+          "tool": "hold_case",
+          "input": {
+            "reason": "Required receipt quantity is incomplete",
+            "key": "SYN-042-hold"
+          },
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T18:47:29.852787Z"
+        },
+        {
+          "sequence": 5,
+          "tool": "get_invoice",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T18:47:29.854135Z"
+        }
+      ],
+      "transitions": [
+        {
+          "sequence": 1,
+          "entity": "invoice",
+          "before": "open",
+          "after": "held",
+          "reason": "Required receipt quantity is incomplete",
+          "timestamp": "2026-11-11T18:47:29.852766Z"
+        }
+      ],
+      "compensations": []
+    }
+  }
+}

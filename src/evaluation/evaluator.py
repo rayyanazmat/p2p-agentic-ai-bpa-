@@ -47,7 +47,11 @@ class Evaluator:
         for case in cases:
             agent = agent_factory(self.client)
             start = time.perf_counter()
-            run = agent.run(case)
+            # Keep frozen evaluation labels outside the controller's input.
+            decision_case = {
+                key: value for key, value in case.items() if key != "expected_state"
+            }
+            run = agent.run(decision_case)
             latency = time.perf_counter() - start
             latencies.append(latency)
             actual = self.client.request(
@@ -84,6 +88,11 @@ class Evaluator:
                     "expected_status": expected_status,
                     "actual_status": actual["status"],
                     "exact_match": matched,
+                    "policy_violation": case_violation,
+                    "unsafe_mutation": unsafe_case,
+                    "intervention_required": bool(
+                        run.get("intervention_required", False)
+                    ),
                     "latency_seconds": round(latency, 4),
                     "agent": run,
                     "audit": audit,
@@ -125,4 +134,3 @@ class Evaluator:
         """Save metrics and per-case full tool audit trails as JSON."""
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(summary_list, indent=2) + "\n", encoding="utf-8")
-

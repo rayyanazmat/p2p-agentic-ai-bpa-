@@ -1,0 +1,22 @@
+{
+  "source_experiment": "E3_proposed_system",
+  "case_count": 100,
+  "end_state_mismatch_count": 0,
+  "policy_violation_case_count": 40,
+  "policy_violation_category_counts": {
+    "three_way_missing_gr": 20,
+    "unverified_invoice": 5,
+    "duplicate_invoice": 5,
+    "amount_mismatch": 5,
+    "incomplete_receipt": 5
+  },
+  "representative_success_cases": [
+    "SYN-001",
+    "SYN-002"
+  ],
+  "representative_policy_risk_cases": [
+    "SYN-041",
+    "SYN-081"
+  ],
+  "interpretation": "Policy-risk cases are reported separately from end-state mismatches. This synthetic benchmark's fault composition must not be interpreted as production failure prevalence."
+}

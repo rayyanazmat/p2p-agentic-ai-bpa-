@@ -32,6 +32,17 @@ data/processed/*
 # Generated submission document
 Phase1_AI4015_22P-0507.pdf
 
+# Generated LaTeX outputs and stale/compiled paper exports
+submission/*.aux
+submission/*.bbl
+submission/*.blg
+submission/*.log
+submission/*.out
+submission/paper.pdf
+submission/DRAFT_STALE_*.pdf
+submission/Phase2_AI4015_22P-0507_Paper.pdf
+submission/Phase2_AI4015_22P-0507_Paper_source.zip
+
 # Local databases, logs, and run outputs
 *.db
 *.sqlite

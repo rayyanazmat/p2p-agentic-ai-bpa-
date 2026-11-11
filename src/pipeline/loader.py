@@ -73,8 +73,11 @@ def make_case(index: int, category: str, fault: str | None = None) -> dict[str, 
     }
 
 
-def generate_manifest(path: Path, seed: int = SEED) -> list[dict[str, Any]]:
-    """Write a reproducible 100-case synthetic manifest to ``path``."""
+def generate_manifest(path: Path, seed: int = SEED, size: int = 100) -> list[dict[str, Any]]:
+    """Write a reproducible synthetic manifest to ``path`` with a configurable case count."""
+    if size <= 0:
+        raise ValueError("Manifest size must be positive")
+
     rng = random.Random(seed)
     categories = [
         "two_way",
@@ -82,25 +85,31 @@ def generate_manifest(path: Path, seed: int = SEED) -> list[dict[str, Any]]:
         "three_way_missing_gr",
         "consignment",
     ]
-    cases = [
-        make_case(i, categories[(i - 1) // 20]) for i in range(1, 81)
-    ]
-    faults = [
-        "amount_mismatch",
-        "incomplete_receipt",
-        "unverified_invoice",
-        "duplicate_invoice",
-    ] * 5
-    rng.shuffle(faults)
-    cases.extend(
-        make_case(i, "fault_injected", fault)
-        for i, fault in zip(range(81, 101), faults)
-    )
+    cases: list[dict[str, Any]] = []
+
+    base_size = min(size, len(categories) * 20)
+    for index in range(1, base_size + 1):
+        category = categories[(index - 1) // 20]
+        cases.append(make_case(index, category))
+
+    if size > base_size:
+        remaining = size - base_size
+        faults = [
+            "amount_mismatch",
+            "incomplete_receipt",
+            "unverified_invoice",
+            "duplicate_invoice",
+        ] * ((remaining + 3) // 4)
+        rng.shuffle(faults)
+        for offset, fault in enumerate(faults[:remaining], start=base_size + 1):
+            cases.append(make_case(offset, "fault_injected", fault))
+
     document = {
-        "manifest_version": "1.0",
+        "manifest_version": "1.1",
         "dataset": "synthetic_fixture_not_BPI_2019",
         "seed": seed,
         "case_count": len(cases),
+        "catalog_size": size,
         "cases": cases,
     }
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -119,6 +128,32 @@ def load_manifest(path: Path) -> list[dict[str, Any]]:
     if len({case["case_id"] for case in cases}) != len(cases):
         raise ValueError("Manifest case_id values must be unique")
     return cases
+
+
+def summarize_case_manifest(cases: list[dict[str, Any]]) -> dict[str, Any]:
+    """Produce a compact summary suitable for dataset documentation and paper appendix tables."""
+    category_counts: defaultdict[str, int] = defaultdict(int)
+    fault_counts: defaultdict[str, int] = defaultdict(int)
+    expected_counts: defaultdict[str, int] = defaultdict(int)
+    synthetic_count = 0
+
+    for case in cases:
+        category = case.get("category", "unknown")
+        category_counts[category] += 1
+        fault = case.get("fault") or "none"
+        fault_counts[fault] += 1
+        expected = case.get("expected_state", {}).get("invoice_status", "unknown")
+        expected_counts[expected] += 1
+        if case.get("synthetic"):
+            synthetic_count += 1
+
+    return {
+        "case_count": len(cases),
+        "synthetic_case_count": synthetic_count,
+        "category_counts": dict(sorted(category_counts.items())),
+        "fault_counts": dict(sorted(fault_counts.items())),
+        "expected_status_counts": dict(sorted(expected_counts.items())),
+    }
 
 
 def _xes_attributes(element: ET.Element) -> dict[str, str]:

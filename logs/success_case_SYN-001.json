@@ -1,0 +1,161 @@
+{
+  "classification": "successful_case",
+  "source_experiment": "E3_proposed_system",
+  "case": {
+    "case_id": "SYN-001",
+    "po_item_id": "PO-001-10",
+    "invoice_id": "INV-001",
+    "po_quantity": 10.0,
+    "po_amount": 101.0,
+    "invoice_amount": 101.0,
+    "currency": "USD",
+    "matching_type": "two_way",
+    "category": "two_way",
+    "fault": null,
+    "invoice_verified": true,
+    "invoice_status": "open",
+    "po_status": "open",
+    "receipt_events": [],
+    "duplicate_invoice": false,
+    "expected_state": {
+      "invoice_status": "cleared"
+    },
+    "synthetic": true
+  },
+  "trajectory": {
+    "case_id": "SYN-001",
+    "expected_status": "cleared",
+    "actual_status": "cleared",
+    "exact_match": true,
+    "policy_violation": false,
+    "unsafe_mutation": false,
+    "intervention_required": false,
+    "latency_seconds": 0.004,
+    "agent": {
+      "case_id": "SYN-001",
+      "outcome": "cleared",
+      "backend": "offline-scripted-react",
+      "actions": [
+        {
+          "turn": 1,
+          "action": "clear",
+          "reason": "Two-way invoice and PO amounts match"
+        }
+      ],
+      "policy_violations": [],
+      "intervention_required": false,
+      "input_tokens": 112,
+      "output_tokens": 16,
+      "agent_state": {
+        "case_id": "SYN-001",
+        "po_item_id": "PO-001-10",
+        "invoice_id": "INV-001",
+        "phase": "cleared",
+        "observations": [
+          {
+            "tool": "get_purchase_order",
+            "result": {
+              "case_id": "SYN-001",
+              "po_item_id": "PO-001-10",
+              "quantity": 10.0,
+              "amount": 101.0,
+              "currency": "USD",
+              "matching_type": "two_way",
+              "status": "open"
+            }
+          },
+          {
+            "tool": "get_invoice",
+            "result": {
+              "case_id": "SYN-001",
+              "invoice_id": "INV-001",
+              "po_item_id": "PO-001-10",
+              "amount": 101.0,
+              "currency": "USD",
+              "verified": true,
+              "duplicate_invoice": false,
+              "status": "open"
+            }
+          },
+          {
+            "tool": "get_goods_receipts",
+            "result": {
+              "po_item_id": "PO-001-10",
+              "receipt_events": [],
+              "verified_quantity": 0.0
+            }
+          }
+        ],
+        "actions": [
+          {
+            "turn": 1,
+            "action": "clear",
+            "reason": "Two-way invoice and PO amounts match"
+          }
+        ],
+        "estimated_input_tokens": 112,
+        "estimated_output_tokens": 16,
+        "intervention_required": false,
+        "policy_violations": []
+      }
+    },
+    "audit": {
+      "case_id": "SYN-001",
+      "tool_calls": [
+        {
+          "sequence": 1,
+          "tool": "get_purchase_order",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.130213Z"
+        },
+        {
+          "sequence": 2,
+          "tool": "get_invoice",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.131277Z"
+        },
+        {
+          "sequence": 3,
+          "tool": "get_goods_receipts",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.132081Z"
+        },
+        {
+          "sequence": 4,
+          "tool": "clear_invoice",
+          "input": {
+            "key": "SYN-001-clear"
+          },
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.133104Z"
+        },
+        {
+          "sequence": 5,
+          "tool": "get_invoice",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.133998Z"
+        }
+      ],
+      "transitions": [
+        {
+          "sequence": 1,
+          "entity": "invoice",
+          "before": "open",
+          "after": "cleared",
+          "reason": "policy preconditions met",
+          "timestamp": "2026-11-11T19:36:09.133082Z"
+        }
+      ],
+      "compensations": []
+    }
+  }
+}

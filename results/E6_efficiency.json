@@ -1,0 +1,125 @@
+{
+  "label": "E6_efficiency",
+  "case_count": 100,
+  "baseline_run_artifact": "/home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/data/processed/baseline_run.json",
+  "ablation_run_artifact": "/home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/results/ablation_run.json",
+  "baseline_metrics": [
+    {
+      "system": "Baseline \u2014 ReAct",
+      "case_count": 100,
+      "end_state_exact_match": 1.0,
+      "policy_violation_rate": 0.4,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "cost_per_case_usd": 0.0,
+      "token_count": 20180,
+      "mean_latency_seconds": 0.008054717689956305,
+      "p95_latency_seconds": 0.0119,
+      "tool_calls_per_case": 6.2
+    },
+    {
+      "system": "Baseline \u2014 Heuristic",
+      "case_count": 100,
+      "end_state_exact_match": 1.0,
+      "policy_violation_rate": 0.4,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "cost_per_case_usd": 0.0,
+      "token_count": 0,
+      "mean_latency_seconds": 0.006452949209924555,
+      "p95_latency_seconds": 0.0098,
+      "tool_calls_per_case": 5.4
+    }
+  ],
+  "ablation_metrics": {
+    "react_policy_on_approval_on": {
+      "case_count": 100,
+      "exact_match_rate": 1.0,
+      "policy_violation_rate": 0.4,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "mean_latency_seconds": 0.007804453189164633,
+      "p95_latency_seconds": 0.012624838011106476,
+      "tool_calls_per_case": 6.2,
+      "token_count": 20180
+    },
+    "react_policy_off_approval_on": {
+      "case_count": 100,
+      "exact_match_rate": 1.0,
+      "policy_violation_rate": 0.0,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "mean_latency_seconds": 0.007584296209097374,
+      "p95_latency_seconds": 0.012081961001968011,
+      "tool_calls_per_case": 6.2,
+      "token_count": 20180
+    },
+    "react_policy_on_approval_off": {
+      "case_count": 100,
+      "exact_match_rate": 1.0,
+      "policy_violation_rate": 0.4,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "mean_latency_seconds": 0.00860961000988027,
+      "p95_latency_seconds": 0.01798779000819195,
+      "tool_calls_per_case": 6.2,
+      "token_count": 20180
+    },
+    "react_policy_off_approval_off": {
+      "case_count": 100,
+      "exact_match_rate": 1.0,
+      "policy_violation_rate": 0.0,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "mean_latency_seconds": 0.007840531180991093,
+      "p95_latency_seconds": 0.013033386989263818,
+      "tool_calls_per_case": 6.2,
+      "token_count": 20180
+    },
+    "heuristic_policy_on_approval_on": {
+      "case_count": 100,
+      "exact_match_rate": 1.0,
+      "policy_violation_rate": 0.4,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "mean_latency_seconds": 0.005635419399768579,
+      "p95_latency_seconds": 0.00805221799237188,
+      "tool_calls_per_case": 5.4,
+      "token_count": 0
+    },
+    "heuristic_policy_off_approval_on": {
+      "case_count": 100,
+      "exact_match_rate": 1.0,
+      "policy_violation_rate": 0.0,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "mean_latency_seconds": 0.005492380310752196,
+      "p95_latency_seconds": 0.008038993997615762,
+      "tool_calls_per_case": 5.4,
+      "token_count": 0
+    },
+    "heuristic_policy_on_approval_off": {
+      "case_count": 100,
+      "exact_match_rate": 1.0,
+      "policy_violation_rate": 0.4,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "mean_latency_seconds": 0.005577128260047175,
+      "p95_latency_seconds": 0.008567451004637405,
+      "tool_calls_per_case": 5.4,
+      "token_count": 0
+    },
+    "heuristic_policy_off_approval_off": {
+      "case_count": 100,
+      "exact_match_rate": 1.0,
+      "policy_violation_rate": 0.0,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "mean_latency_seconds": 0.005377145170059521,
+      "p95_latency_seconds": 0.00795231299707666,
+      "tool_calls_per_case": 5.4,
+      "token_count": 0
+    }
+  },
+  "interpretation_note": "Offline deterministic runs report zero provider cost; this is not a hosted-model cost estimate. Latency is local simulator wall time."
+}

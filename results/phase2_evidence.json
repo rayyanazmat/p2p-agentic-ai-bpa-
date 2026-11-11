@@ -1,0 +1,127 @@
+{
+  "project": "Policy-Grounded Agentic AI for Safe Purchase-to-Pay Automation",
+  "phase": "Phase 2",
+  "evaluation_scope": {
+    "synthetic_cases": 100,
+    "synthetic_seed": 2019,
+    "bpi_proxy_cases": 100,
+    "agent_backend": "offline scripted",
+    "interpretation": "Deterministic local simulator results; expected terminal labels are withheld from decision components and used only by the evaluator after execution. BPI-derived invoice fields and expected statuses are reconstructed proxy labels, not observed invoice ground truth.",
+    "refreshed": "2026-11-12"
+  },
+  "experiments": {
+    "E1": {
+      "agent": "ReAct",
+      "policy_enabled": false,
+      "approval_enabled": false,
+      "cases": 100,
+      "exact_match_rate": 1.0,
+      "policy_risk_alert_rate": 0.0,
+      "alert_semantics": "Detector disabled; not evidence of absence of risk.",
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "p95_latency_seconds": 0.0137,
+      "tool_calls_per_case": 6.2,
+      "estimated_tokens": 20180,
+      "offline_provider_cost_per_case_usd": 0.0
+    },
+    "E2": {
+      "agent": "heuristic",
+      "policy_enabled": true,
+      "approval_enabled": true,
+      "cases": 100,
+      "exact_match_rate": 1.0,
+      "policy_risk_alert_rate": 0.4,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "p95_latency_seconds": 0.0112,
+      "tool_calls_per_case": 5.4,
+      "estimated_tokens": 0,
+      "comparability": "Domain comparator only; not a reproduction of the selected Declare-translation base paper."
+    },
+    "E3": {
+      "agent": "ReAct",
+      "policy_enabled": true,
+      "approval_enabled": true,
+      "cases": 100,
+      "exact_match_rate": 1.0,
+      "policy_risk_alert_rate": 0.4,
+      "unsafe_mutation_rate": 0.0,
+      "intervention_rate": 0.4,
+      "p95_latency_seconds": 0.0114,
+      "tool_calls_per_case": 6.2,
+      "estimated_tokens": 20180
+    },
+    "E4": {
+      "data": "100 BPI Challenge 2019 trace-derived replay cases with reconstructed proxy labels",
+      "react": {
+        "exact_match_rate_against_proxy": 1.0,
+        "policy_risk_alert_rate": 0.55,
+        "unsafe_mutation_rate_against_proxy": 0.0,
+        "intervention_rate": 0.55,
+        "p95_latency_seconds": 0.0111,
+        "tool_calls_per_case": 6.17,
+        "estimated_tokens": 20489
+      },
+      "heuristic": {
+        "exact_match_rate_against_proxy": 1.0,
+        "policy_risk_alert_rate": 0.55,
+        "unsafe_mutation_rate_against_proxy": 0.0,
+        "intervention_rate": 0.55,
+        "p95_latency_seconds": 0.0085,
+        "tool_calls_per_case": 5.39,
+        "estimated_tokens": 0
+      },
+      "limitation": "Proxy agreement is not invoice-level ground-truth accuracy."
+    },
+    "E5": {
+      "cases_per_variant": 100,
+      "variants": [
+        {"agent": "ReAct", "policy": true, "approval": true, "exact_match_rate": 1.0, "policy_risk_alert_rate": 0.4, "unsafe_mutation_rate": 0.0, "intervention_rate": 0.4},
+        {"agent": "ReAct", "policy": false, "approval": true, "exact_match_rate": 1.0, "policy_risk_alert_rate": 0.0, "unsafe_mutation_rate": 0.0, "intervention_rate": 0.4},
+        {"agent": "ReAct", "policy": true, "approval": false, "exact_match_rate": 1.0, "policy_risk_alert_rate": 0.4, "unsafe_mutation_rate": 0.0, "intervention_rate": 0.4},
+        {"agent": "ReAct", "policy": false, "approval": false, "exact_match_rate": 1.0, "policy_risk_alert_rate": 0.0, "unsafe_mutation_rate": 0.0, "intervention_rate": 0.4},
+        {"agent": "heuristic", "policy": true, "approval": true, "exact_match_rate": 1.0, "policy_risk_alert_rate": 0.4, "unsafe_mutation_rate": 0.0, "intervention_rate": 0.4},
+        {"agent": "heuristic", "policy": false, "approval": true, "exact_match_rate": 1.0, "policy_risk_alert_rate": 0.0, "unsafe_mutation_rate": 0.0, "intervention_rate": 0.4},
+        {"agent": "heuristic", "policy": true, "approval": false, "exact_match_rate": 1.0, "policy_risk_alert_rate": 0.4, "unsafe_mutation_rate": 0.0, "intervention_rate": 0.4},
+        {"agent": "heuristic", "policy": false, "approval": false, "exact_match_rate": 1.0, "policy_risk_alert_rate": 0.0, "unsafe_mutation_rate": 0.0, "intervention_rate": 0.4}
+      ],
+      "interpretation": "Policy-off zero alert means detector disabled. Approval toggle did not change aggregate metrics."
+    },
+    "E6": {
+      "cases": 100,
+      "react_controls_on": {
+        "exact_match_rate": 1.0,
+        "unsafe_mutation_rate": 0.0,
+        "mean_latency_seconds": 0.008054717689956305,
+        "p95_latency_seconds": 0.0119,
+        "tool_calls_per_case": 6.2,
+        "estimated_tokens": 20180
+      },
+      "heuristic_controls_on": {
+        "exact_match_rate": 1.0,
+        "unsafe_mutation_rate": 0.0,
+        "mean_latency_seconds": 0.006452949209924555,
+        "p95_latency_seconds": 0.0098,
+        "tool_calls_per_case": 5.4,
+        "estimated_tokens": 0
+      },
+      "offline_provider_cost_usd": 0.0,
+      "cost_note": "No hosted inference was used; this is not a hosted-model cost estimate."
+    }
+  },
+  "failure_analysis": {
+    "E3_terminal_mismatches": 0,
+    "E3_policy_risk_cases": 40,
+    "risk_category_counts": {
+      "three_way_missing_gr": 20,
+      "unverified_invoice": 5,
+      "duplicate_invoice": 5,
+      "amount_mismatch": 5,
+      "incomplete_receipt": 5
+    },
+    "representative_success_cases": ["SYN-001", "SYN-002"],
+    "representative_policy_risk_cases": ["SYN-041", "SYN-081"],
+    "interpretation": "Risk cases were correctly held and are not terminal-state failures; synthetic category frequencies are not production prevalence."
+  }
+}

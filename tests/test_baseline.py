@@ -90,3 +90,42 @@ def test_baselines_complete_end_to_end() -> None:
         process.terminate()
         process.wait(timeout=5)
 
+
+def test_smoke_test_builds_summary_for_ci(monkeypatch, tmp_path) -> None:
+    """The smoke-test command produces a compact validation result without a full run."""
+    import main
+
+    manifest_path = tmp_path / "test_manifest_100.json"
+    processed_dir = tmp_path / "processed"
+    manifest = {
+        "manifest_version": "1.0",
+        "dataset": "synthetic_fixture_not_BPI_2019",
+        "seed": 2019,
+        "case_count": 1,
+        "cases": [make_case(1, "two_way")],
+    }
+    manifest_path.write_text(__import__("json").dumps(manifest), encoding="utf-8")
+
+    monkeypatch.setattr(main, "MANIFEST_PATH", manifest_path)
+    monkeypatch.setattr(main, "PROCESSED_DIR", processed_dir)
+
+    observed: dict[str, object] = {}
+
+    def fake_run_baselines(limit, manifest_path=None, output_name="baseline_run.json"):
+        observed["limit"] = limit
+        observed["manifest_path"] = manifest_path
+        observed["output_name"] = output_name
+        return [{"case_count": 1}]
+
+    monkeypatch.setattr(main, "run_baselines", fake_run_baselines)
+
+    result = main.smoke_test(limit=1)
+
+    assert result["ok"] is True
+    assert result["input_case_count"] == 1
+    assert result["manifest_case_count"] == 1
+    assert result["result_count"] == 1
+    assert observed["limit"] == 1
+    assert observed["manifest_path"] == manifest_path
+    assert observed["output_name"] == "smoke_test.json"
+

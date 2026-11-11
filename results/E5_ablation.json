@@ -1,0 +1,13 @@
+{
+  "label": "E5_ablation",
+  "command": [
+    "/home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/.venv/bin/python",
+    "main.py",
+    "--ablation-study",
+    "--cases",
+    "100"
+  ],
+  "returncode": 0,
+  "stdout": "Detailed ablation results: /home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/results/ablation_run.json\n\nAblation summary table:\n| variant | case_count | exact_match_rate | policy_violation_rate | intervention_rate |\n| --- | --- | --- | --- | --- |\n| react_policy_on_approval_on | 100 | 1.0000 | 0.4000 | 0.4000 |\n| react_policy_off_approval_on | 100 | 1.0000 | 0.0000 | 0.4000 |\n| react_policy_on_approval_off | 100 | 1.0000 | 0.4000 | 0.4000 |\n| react_policy_off_approval_off | 100 | 1.0000 | 0.0000 | 0.4000 |\n| heuristic_policy_on_approval_on | 100 | 1.0000 | 0.4000 | 0.4000 |\n| heuristic_policy_off_approval_on | 100 | 1.0000 | 0.0000 | 0.4000 |\n| heuristic_policy_on_approval_off | 100 | 1.0000 | 0.4000 | 0.4000 |\n| heuristic_policy_off_approval_off | 100 | 1.0000 | 0.0000 | 0.4000 |\n\nExact match summary:\n{\"exact_match_mean\": 1.0, \"exact_match_range\": [1.0, 1.0], \"exact_match_stddev\": 0.0}\n\nreact_policy_on_approval_on: exact_match=1.00 policy_violation_rate=0.40 intervention_rate=0.40\n\nreact_policy_off_approval_on: exact_match=1.00 policy_violation_rate=0.00 intervention_rate=0.40\n\nreact_policy_on_approval_off: exact_match=1.00 policy_violation_rate=0.40 intervention_rate=0.40\n\nreact_policy_off_approval_off: exact_match=1.00 policy_violation_rate=0.00 intervention_rate=0.40\n\nheuristic_policy_on_approval_on: exact_match=1.00 policy_violation_rate=0.40 intervention_rate=0.40\n\nheuristic_policy_off_approval_on: exact_match=1.00 policy_violation_rate=0.00 intervention_rate=0.40\n\nheuristic_policy_on_approval_off: exact_match=1.00 policy_violation_rate=0.40 intervention_rate=0.40\n\nheuristic_policy_off_approval_off: exact_match=1.00 policy_violation_rate=0.00 intervention_rate=0.40",
+  "stderr": ""
+}

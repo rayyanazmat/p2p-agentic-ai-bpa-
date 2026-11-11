@@ -1,0 +1,169 @@
+{
+  "classification": "policy_risk_case",
+  "classification_note": "A detected policy-violation condition. It is not necessarily an end-state mismatch; see the recorded metrics and trajectory.",
+  "source_experiment": "E3_proposed_system",
+  "case": {
+    "case_id": "SYN-081",
+    "po_item_id": "PO-081-10",
+    "invoice_id": "INV-081",
+    "po_quantity": 10.0,
+    "po_amount": 181.0,
+    "invoice_amount": 181.0,
+    "currency": "USD",
+    "matching_type": "three_way",
+    "category": "fault_injected",
+    "fault": "unverified_invoice",
+    "invoice_verified": false,
+    "invoice_status": "open",
+    "po_status": "open",
+    "receipt_events": [],
+    "duplicate_invoice": false,
+    "expected_state": {
+      "invoice_status": "held"
+    },
+    "synthetic": true
+  },
+  "trajectory": {
+    "case_id": "SYN-081",
+    "expected_status": "held",
+    "actual_status": "held",
+    "exact_match": true,
+    "policy_violation": true,
+    "unsafe_mutation": false,
+    "intervention_required": true,
+    "latency_seconds": 0.0034,
+    "agent": {
+      "case_id": "SYN-081",
+      "outcome": "held",
+      "backend": "offline-scripted-react",
+      "actions": [
+        {
+          "turn": 1,
+          "action": "hold",
+          "reason": "Invoice evidence is incomplete or inconsistent"
+        }
+      ],
+      "policy_violations": [
+        "invoice_unverified",
+        "incomplete_receipt"
+      ],
+      "intervention_required": true,
+      "input_tokens": 113,
+      "output_tokens": 16,
+      "agent_state": {
+        "case_id": "SYN-081",
+        "po_item_id": "PO-081-10",
+        "invoice_id": "INV-081",
+        "phase": "held",
+        "observations": [
+          {
+            "tool": "get_purchase_order",
+            "result": {
+              "case_id": "SYN-081",
+              "po_item_id": "PO-081-10",
+              "quantity": 10.0,
+              "amount": 181.0,
+              "currency": "USD",
+              "matching_type": "three_way",
+              "status": "open"
+            }
+          },
+          {
+            "tool": "get_invoice",
+            "result": {
+              "case_id": "SYN-081",
+              "invoice_id": "INV-081",
+              "po_item_id": "PO-081-10",
+              "amount": 181.0,
+              "currency": "USD",
+              "verified": false,
+              "duplicate_invoice": false,
+              "status": "open"
+            }
+          },
+          {
+            "tool": "get_goods_receipts",
+            "result": {
+              "po_item_id": "PO-081-10",
+              "receipt_events": [],
+              "verified_quantity": 0.0
+            }
+          }
+        ],
+        "actions": [
+          {
+            "turn": 1,
+            "action": "hold",
+            "reason": "Invoice evidence is incomplete or inconsistent"
+          }
+        ],
+        "estimated_input_tokens": 113,
+        "estimated_output_tokens": 16,
+        "intervention_required": true,
+        "policy_violations": [
+          "invoice_unverified",
+          "incomplete_receipt"
+        ]
+      }
+    },
+    "audit": {
+      "case_id": "SYN-081",
+      "tool_calls": [
+        {
+          "sequence": 1,
+          "tool": "get_purchase_order",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.984768Z"
+        },
+        {
+          "sequence": 2,
+          "tool": "get_invoice",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.985470Z"
+        },
+        {
+          "sequence": 3,
+          "tool": "get_goods_receipts",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.986068Z"
+        },
+        {
+          "sequence": 4,
+          "tool": "hold_case",
+          "input": {
+            "reason": "Invoice evidence is incomplete or inconsistent",
+            "key": "SYN-081-hold"
+          },
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.987127Z"
+        },
+        {
+          "sequence": 5,
+          "tool": "get_invoice",
+          "input": {},
+          "outcome": "ok",
+          "status_code": 200,
+          "timestamp": "2026-11-11T19:36:09.988501Z"
+        }
+      ],
+      "transitions": [
+        {
+          "sequence": 1,
+          "entity": "invoice",
+          "before": "open",
+          "after": "held",
+          "reason": "Invoice evidence is incomplete or inconsistent",
+          "timestamp": "2026-11-11T19:36:09.987110Z"
+        }
+      ],
+      "compensations": []
+    }
+  }
+}

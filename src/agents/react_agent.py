@@ -26,6 +26,8 @@ from config import (
     REQUEST_TIMEOUT_SECONDS,
 )
 from src.agents.state import AgentState
+from src.orchestration.controller import ApprovalController
+from src.policies.engine import PolicyEngine
 
 
 class ToolError(Exception):
@@ -318,18 +320,28 @@ class ReActAgent:
         client: ToolClient,
         backend: DecisionBackend | None = None,
         max_turns: int = AGENT_MAX_TURNS,
+        policy_enabled: bool = True,
+        approval_enabled: bool = True,
     ) -> None:
         self.client = client
         self.backend = backend or configured_backend()
         self.max_turns = max_turns
+        self.policy_enabled = policy_enabled
+        self.approval_enabled = approval_enabled
 
     def run(self, case: dict[str, Any]) -> dict[str, Any]:
         """Run one procurement case and return a reproducible trace summary."""
+        policy_report = PolicyEngine.evaluate(case) if self.policy_enabled else None
+        approval = ApprovalController.decide(case) if self.approval_enabled else None
         state = AgentState(
             case_id=case["case_id"],
             po_item_id=case["po_item_id"],
             invoice_id=case["invoice_id"],
         )
+        if policy_report is not None:
+            state.policy_violations = [item.rule for item in policy_report.violations]
+        if approval is not None and approval.decision != "approve":
+            state.intervention_required = True
         state_dict: dict[str, Any] = {}
         initial_reads = (
             ("get_purchase_order", "purchase_order", case["po_item_id"]),

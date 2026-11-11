@@ -1,37 +1,75 @@
 # Policy-Grounded Agentic AI for Safe Purchase-to-Pay Automation
 
-**Project code:** AI4015-P2P-01  
-**Phase 1 repository:** Deliverable C — Technical Foundation and Working Baseline
+**Course:** AI4015 — Agentic Artificial Intelligence
+**Project code:** AI4015
+**Phase:** 2 — Policy-Grounded Workflow Hardening and Validation
 
-## Abstract
+## Overview
 
-This repository implements a deterministic mock procurement API and two initial purchase-to-pay (P2P) baselines: a structured-output ReAct loop and a fixed heuristic workflow. It includes a synthetic fixture, a streaming BPI Challenge 2019 XES profiler/replay-manifest builder, idempotent mutation contracts, audit records, and case-level evaluation metrics. The planned research direction extends Fionda *et al.*'s Declare semantic-validation work [1] with policy-aware simulated ERP actions. The checked-in `data/test_manifest_100.json` is synthetic; the locally generated BPI replay fixture is based on observed traces but reconstructs transaction values and proxy outcomes. Neither should be presented as a source-labeled transaction ground-truth benchmark.
+This project studies agentic automation for purchase-to-pay (P2P) workflows. The repository provides a local procurement simulator, two baseline agents, a data pipeline for synthetic and BPI Challenge 2019 cases, and an evaluation harness.
 
-The selected primary source is BPI Challenge 2019 from 4TU.ResearchData [2]. The IEEE-XES archive and expanded log are present locally under `data/raw/` and excluded from Git. The archive passed gzip integrity and its expanded file matched the publisher's MD5. The streamed profile under `data/processed/bpi_profile.json` reconciles 251,734 traces, 1,595,923 events, 42 activity labels, and 627 resources. Keep the source citation and CC BY 4.0 notice with any redistribution; do not add the large raw log to the repository without checking repository/course policy.
+The simulator is deterministic and does not connect to an ERP or make payments. BPI Challenge 2019 contains historical purchase-order item events, not invoice-level transaction records. Where replay cases require invoice IDs, amounts, quantities, or expected terminal states, those fields are reconstructed and must be treated as synthetic or proxy labels.
 
-## Repository structure
+## Current implementation
+
+- **FastAPI/Pydantic simulator:** purchase-order, invoice, goods-receipt, approval, hold, reset, and audit endpoints.
+- **ReAct baseline:** structured action output with offline, OpenAI-compatible, and local Ollama backends. Offline is the default.
+- **Heuristic baseline:** deterministic workflow rules for comparison.
+- **Data pipeline:** synthetic fixture generation and XES/CSV loading; optional BPI trace profiling and replay-manifest generation.
+- **Policy engine:** explicit rule evaluation for invoice verification, duplicate evidence, amount mismatches, and incomplete receipts.
+- **Approval orchestration:** risk-based review/hold decisions for human-in-the-loop governance.
+- **Compensation safeguards:** corrective plans for unsafe clearances, incomplete receipts, and policy violations.
+- **Evaluation:** end-state match, policy violations, unsafe mutations, interventions, token use, cost, latency, and tool-call metrics.
+
+The project now includes a concrete safety layer in addition to the baseline workflow, providing explicit review and intervention steps before unsafe automation is allowed to proceed.
+
+## Changes since Phase 1
+
+This Phase 2 revision keeps the original Phase 1 baseline, but extends it in the ways required by the official Phase 2 rubric:
+
+- [x] Added a policy-aware decision layer for invoice verification, amount mismatch, incomplete receipt, and duplicate evidence conditions.
+- [x] Added a hold/review orchestration layer and safer escalation logic for human-in-the-loop control.
+- [x] Added compensating safeguards for unsafe or inconsistent states.
+- [x] Added benchmark and ablation reporting utilities for paper-ready tables.
+- [x] Added reproducible result and dataset-summary tooling and a lighter Phase 2 experiment package.
+- [x] Added a development log and environment template to match repository expectations for the semester project.
+
+## Architecture diagram
 
 ```text
-p2p_agentic_ai/
-├── README.md
-├── requirements.txt
-├── config.py
-├── data/
-│   ├── raw/                 # User-acquired BPI Challenge 2019 files; gitignored
-│   ├── processed/           # Generated metrics and derived splits
-│   └── test_manifest_100.json
-├── src/
-│   ├── simulator/           # FastAPI mock ERP and in-memory store
-│   ├── pipeline/            # XES/CSV loader and synthetic fixture generator
-│   ├── agents/              # ReAct and deterministic heuristic baselines
-│   └── evaluation/          # Metric definitions and evaluation harness
-├── tests/
-└── main.py
++--------------------+     +--------------------------+
+| Synthetic / BPI    | --> | Data Loader / Manifest   |
+| cases and labels   |     | generator                |
++--------------------+     +-------------+------------+
+                                          |
+                                          v
+                            +---------------------------+
+                            | Simulator / Tool Service  |
+                            | PO, invoice, GR, hold     |
+                            +-------------+-------------+
+                                          |
+                                          v
+                         +-------------------------------+
+                         | Policy Engine / Approval      |
+                         | review / hold / escalate      |
+                         +---------------+---------------+
+                                         |
+                                         v
+                           +-------------------------------+
+                           | Agent Loop (ReAct / Heuristic)|
+                           | tool usage + reasoning        |
+                           +---------------+---------------+
+                                           |
+                                           v
+                              +-------------------------+
+                              | Evaluation + Ablation    |
+                              | metrics, tables, logs   |
+                              +-------------------------+
 ```
 
-## Quickstart
+## Quick start
 
-Use Python 3.10 or later. From this directory:
+Requires Python 3.10 or later.
 
 ```bash
 python3 -m venv .venv
@@ -39,138 +77,123 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Generate the deterministic synthetic fixture (also created automatically if absent):
+Run a quick repository smoke test before large evaluation runs:
 
 ```bash
-python main.py --generate-manifest
+python main.py --smoke-test
+# or
+python main.py --validate
 ```
 
-Run a local API service in one terminal:
+Run a compact paper-oriented benchmark comparing policy and approval variants:
 
 ```bash
-uvicorn src.simulator.app:app --host 127.0.0.1 --port 8000
+python main.py --paper-benchmark --cases 10
+# or
+python main.py --ablation-study --cases 10
 ```
 
-Or run the demo in another terminal; it starts and stops a local service automatically when one is not already listening:
+Run the Phase 2 evaluation workflow and save reproducible JSON to `results/phase2_experiments.json`:
+
+```bash
+python experiments/run_evaluation.py
+```
+
+Run each required experiment individually (E1–E6):
+
+```bash
+python experiments/e1_baseline.py
+python experiments/e2_base_paper.py
+python experiments/e3_proposed_system.py
+python experiments/e4_gapwise.py
+python experiments/e5_ablation.py
+python experiments/e6_efficiency.py
+```
+
+Run both baselines on the default balanced sample:
 
 ```bash
 python main.py --run-baseline
 ```
 
-The default demo selects a small balanced sample across normal and fault-injected cases. Run the full synthetic 100-case fixture with:
+Run the complete synthetic 100-case fixture:
 
 ```bash
 python main.py --run-baseline --cases 100
 ```
 
-Metrics and full tool/audit traces are written to `data/processed/baseline_run.json`. The CLI prints a compact per-system and per-case summary. To run the tests:
+Summarize the dataset and generate a paper-friendly appendix snapshot:
 
 ```bash
-pytest -q
+python main.py --dataset-summary
 ```
 
-## Model/provider setup
+The CLI starts the local simulator if it is not already running. Results and audit traces are written to `data/processed/baseline_run.json`, while the smoke test writes `data/processed/smoke_test.json`. Ablation runs print a markdown-ready comparison table designed for paper reporting. The archived manuscript in `docs/paper_draft.md` is superseded; use `submission/paper.tex` as the current working source. A compact summary of the saved experiment outputs is in `results/phase2_summary.md`, the machine-readable evidence file is in `results/phase2_evidence.json`, representative success and policy-risk traces are in `logs/`, the working paper source and compiled draft are in `submission/`, and the final submission checklist is in `docs/final_submission_checklist.md`. To start the API separately, run `python main.py --serve`; interactive API documentation is available at `http://127.0.0.1:8000/docs`.
 
-The ReAct architecture has a custom bounded reasoning/action/observation loop and strict JSON decision parsing. With no credentials, it uses `OfflineBackend`, a deterministic scripted planner, so the mock workflow and end-to-end evaluation run without a network provider. This offline backend is **not an LLM result** and must be reported as a deterministic functional baseline.
+## Optional model backends
 
-A local Ollama backend is available for memory-limited experiments. The verified one-case demonstration used `qwen3.5:0.8b`, 2,048-token context, two CPU threads, and Ollama's native JSON chat endpoint with thinking disabled. It returned a valid action but selected receipt verification for a two-way case; the simulator rejected that action and held the case. This proves the model-to-tool path and fail-closed behavior, not task accuracy. The 9B model is not recommended on memory-constrained machines.
+The default ReAct backend is a deterministic offline planner; its output is not an LLM evaluation.
+
+For an OpenAI-compatible hosted model, set `P2P_MODEL_PROVIDER=openai` and `OPENAI_API_KEY`. Optionally set `OPENAI_MODEL` (default: `gpt-4o-mini`) and `OPENAI_BASE_URL` for a compatible service.
+
+For a local Ollama model, ensure Ollama is running and set:
 
 ```bash
 export P2P_MODEL_PROVIDER=ollama
 export OLLAMA_MODEL=qwen3.5:0.8b
 export OLLAMA_NUM_CTX=2048
 export OLLAMA_NUM_THREADS=2
-export P2P_MODEL_CALL_BUDGET=10
 python main.py --run-baseline --cases 1
 ```
 
-Ollama must already be running. Local inference requires model weights and runtime memory on the machine; stop if the system becomes unstable. Local inference is reported at zero API charge, with token counts and latency recorded.
+Hosted calls may incur provider charges. Keep credentials in environment variables and out of Git.
 
-To enable the optional OpenAI-compatible model backend, install the declared `openai` dependency and set environment variables in your shell (never commit secrets):
+## BPI Challenge 2019 replay
 
-```bash
-export OPENAI_API_KEY="your-key"
-export OPENAI_MODEL="gpt-4o-mini"
-# Optional for an OpenAI-compatible gateway:
-export OPENAI_BASE_URL="https://provider.example/v1"
-python main.py --run-baseline --cases 5
-```
-
-Hosted calls use JSON-object mode and the response is validated against the `Decision` Pydantic model. The simulator still enforces its own preconditions; model output never bypasses the tool service. Configure the provider's account-side spending quota before making hosted calls. Record the provider, exact model identifier, date, token usage, and applicable rates with experimental results. If using local inference instead, adapt `DecisionBackend` and record the model/runtime details.
-
-For a computed API cost estimate, set `OPENAI_INPUT_USD_PER_MILLION` and `OPENAI_OUTPUT_USD_PER_MILLION` to the dated rates applicable to the selected model. Hosted cost is reported as `null` when rates are not provided; offline execution reports zero model charge.
-
-## Data pipeline and test fixture
-
-`src/pipeline/loader.py` parses XES traces and event CSV files; `src/pipeline/bpi.py` streams the BPI log and generates a separate PO-document-disjoint manifest with 25 cases per matching category. It restricts candidates to simple traces (at most one invoice receipt, goods receipt, and clear event) with events in 2018. The BPI log contains no invoice IDs, invoice-level amounts, unit quantities, or approval decisions. Those simulator fields are reconstructed and marked synthetic. `Clear Invoice` is an observed trace activity; when it is absent, `held` is assigned as a conservative replay target, not as ground-truth rejection. The separate `data/test_manifest_100.json` uses a fixed seed (`2019`) and has 80 ordinary synthetic cases plus 20 fault-injected synthetic cases.
-
-Build/profile the trace-derived replay fixture:
+The raw event log is excluded from Git. Place the expanded IEEE-XES file at `data/raw/BPI_Challenge_2019.xes`, then build and run the trace-derived replay fixture:
 
 ```bash
 python main.py --build-bpi-fixture
 python main.py --run-bpi-baseline --cases 100
 ```
 
-The current BPI manifest SHA-256 is `286c996aeb8622c1ab3c9dceb4ea841017c55344c571037d43bae67b39cc17bb`. It has already been used for baseline smoke runs. Do not continue to call it an untouched holdout; reserve a new PO-document-disjoint subset for confirmatory testing and record its manifest hash before tuning.
+The fixture groups cases by purchase-order document to avoid item-level leakage. The log does not provide invoice-level IDs, amounts, quantities, or approval decisions; reconstructed transaction fields and proxy outcomes must not be reported as source ground truth. Dataset record and license: [BPI Challenge 2019, 4TU.ResearchData](https://doi.org/10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1), CC BY 4.0.
 
-The **synthetic** fixture tests code paths only. It is not drawn from BPI Challenge 2019 and does not support claims about real business frequencies or real-log generalization. For the BPI replay manifest, the checked-in `src/pipeline/bpi.py` parser was run against the locally acquired XES. The manifest is trace-derived but not transaction-level ground truth: reconstructed fields and conservative hold labels limit conclusions. Split by parent PO document to prevent item-level leakage.
+## Architecture
 
-### Initial functional run
+`src/simulator/` implements the deterministic tool service; `src/agents/` contains the ReAct and heuristic baselines; `src/pipeline/` loads cases and builds fixtures; `src/policies/` checks the safety rules; `src/orchestration/` guides approve/review/hold decisions; `src/safeguards/` defines compensating actions; and `src/evaluation/` runs agents and computes metrics. The CLI entry point is `main.py`.
 
-On 20 October 2026, both baselines completed the synthetic 100-case fixture with 100% end-state exact match, 0% rejected-policy-action rate, 0% unsafe mutation rate, and 40% intervention rate. The ReAct run used `offline-scripted-react`; it did not call a language model. These outcomes verify fixture wiring and expected API behavior only. The synthetic cases and their oracle are generated from the same simple rules as the heuristic, so these results are not independent evidence of policy quality or research performance. The complete per-case results and tool histories are saved in `data/processed/baseline_run.json` after running the documented command.
+| Method | Endpoint | Purpose |
+| :--- | :--- | :--- |
+| `GET` | `/purchase-orders/{po_item_id}` | Read purchase-order item state. |
+| `GET` | `/invoices/{invoice_id}` | Read invoice state. |
+| `GET` | `/goods-receipts/{po_item_id}` | Read receipt evidence. |
+| `POST` | `/goods-receipts/{po_item_id}/verify` | Verify receipt evidence idempotently. |
+| `POST` | `/invoices/{invoice_id}/clear` | Simulate invoice clearing after server-side checks. |
+| `POST` | `/cases/{case_id}/approval` | Record an approval or rejection. |
+| `GET` | `/cases/{case_id}/audit` | Read tool calls and state transitions. |
 
-On 21 October 2026, the offline baselines were also run on 100 BPI trace-derived replay cases. Both matched the generated replay targets on all cases with zero recorded policy violations and unsafe mutations; the intervention rate was 55% for each. This is a pipeline/simulator smoke test only: reconstructed transaction data and conservative `held` proxy labels make these figures unsuitable as claims about real invoice-level accuracy. A separate one-case Qwen 3.5 0.8B run selected a receipt-verification action on a two-way case; the simulator rejected it and safely held the case. Its log is `data/processed/ollama_08b_single_case_demo.json`.
+## Gap-resolution table
 
-## Architecture and tool contracts
+| Gap | Method / component | Metric | Base paper result | Our result | Addressed? |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Safety and policy compliance | Policy engine + approval gate + simulator guards | risk alerts, unsafe mutation, intervention | Not reproduced in the saved experiments | E3 flags 40/100 synthetic cases; unsafe mutation and terminal mismatches are 0. Alerts are not completed unsafe transactions, and server-side guards remain enabled in every variant. | Partial |
+| Human-in-the-loop oversight | Approval and hold orchestration | intervention rate, auditability | Not reproduced in the saved experiments | Expected terminal labels are withheld from agent decisions; E5's approval toggle still has no aggregate effect in the fixed run, and no human-review study was conducted. | Partial |
+| Transfer to procurement event traces | BPI Challenge 2019 replay | exact match, risk alerts | No like-for-like comparison is recorded | E4 replays 100 trace-derived cases with 1.00 agreement against reconstructed proxy labels and a 0.55 alert rate; this is not invoice ground truth. | Partial |
+| Joint evaluation and reporting | E1–E6 scripts, ablation, logs, manuscript | correctness, safety, oversight, efficiency | E2 is not a base-paper reproduction | Eight-page, 8–10 page-format manuscript includes the rubric sections, gap table, 30 cited sources, and result tables. Group review, AI-use permission confirmation, Turnitin, and final release packaging remain pending. | In progress |
 
-The simulator is a deterministic FastAPI application with Pydantic input/output models and an in-memory, thread-safe store. It models no live ERP and sends no payment. The admin reset and state-read endpoints exist solely to seed and score local experiments. By default, the CLI binds its service to `127.0.0.1`.
+These are deterministic local prototype results, not estimates of production performance. See `docs/rubric_compliance_check.md` for the detailed evidence limits and remaining submission work.
 
-| Method and route | Contract behavior |
-| :--- | :--- |
-| `GET /purchase-orders/{po_item_id}` | Read PO quantity, amount, currency, matching type, and status. |
-| `GET /invoices/{invoice_id}` | Read invoice amount, verification, duplicate marker, and clearing status. |
-| `GET /goods-receipts/{po_item_id}` | Read receipt events and verified quantity. |
-| `POST /goods-receipts/{po_item_id}/verify` | Verify complete receipt evidence; requires `idempotency_key`. |
-| `POST /invoices/{invoice_id}/clear` | Simulate clearing after server-side invoice, amount, duplicate, and receipt checks; requires `idempotency_key`. |
-| `POST /cases/{case_id}/approval` | Record approve/reject decision, rationale, and evidence reference. |
-| `GET /cases/{case_id}/audit` | Return tool-call and state-transition history. |
-| `POST /cases/{case_id}/hold` | Additional local action to safely route unresolved cases for review; requires an idempotency key and reason. |
-| `POST /admin/reset`, `GET /admin/cases/{case_id}` | Local test harness endpoints; seed and read case state/oracle. Do not expose beyond localhost. |
+## Tests
 
-The two baselines use the same HTTP tools and seeded state. Baseline 1 uses a ReAct loop with a hosted structured-output backend when configured, otherwise the explicitly labeled offline planner. Baseline 2 uses fixed branches with no LLM planning. Both produce server audit traces. The evaluator reports end-state exact match, policy-violation rate, unsafe-mutation rate, intervention rate, token use/cost field, p95 latency, mean latency, and calls per case. The current in-memory implementation blocks policy-invalid mutations; unsafe mutation rate should therefore remain zero unless a defect is found. Policy-violation rate includes rejected attempts and agent-recorded policy failures.
-
-## GitHub and supervisor access
-
-This workspace does not create a remote repository or change GitHub permissions. To share the implementation with the course supervisor:
-
-1. Create a private GitHub repository under the group owner account and push this directory using the course-approved account.
-2. Add the supervisor as a collaborator with repository read access (or use the public repository option if the group approves public release).
-3. Confirm access while signed out or with a supervisor-provided account, then submit the repository URL with the Phase 1 submission.
-4. Keep API credentials, downloaded data subject to license restrictions, `.env` files, and generated sensitive outputs out of commits. Commit the synthetic fixture and code; document any excluded data and acquisition instructions.
-
-Suggested initial commands after repository creation:
+Run the repository test suite with:
 
 ```bash
-git init
-git add README.md requirements.txt config.py src tests main.py data/test_manifest_100.json
-git commit -m "Add P2P simulator and baseline evaluation"
-git branch -M main
-git remote add origin <group-repository-url>
-git push -u origin main
+pytest -q
 ```
-
-Make meaningful commits under each contributor's own account; a single generated commit does not demonstrate the course's requested contribution history.
-
-## Limitations and next implementation steps
-
-- The proposed Declare retrieval, ASP/LTL validator, risk-based human-approval orchestration, and compensating-action workflow are not yet implemented; the current repository is the Deliverable C technical foundation with two baselines.
-- The checked-in synthetic oracle is intentionally simple and must not be presented as a validated procurement policy or production behavior.
-- Hosted model evaluation still requires provider credentials. The one-case local Qwen smoke test is not a comparative experiment and exposed a wrong action from a small model; the offline backend does not count as an LLM experiment.
-- The simulator records approval decisions but the initial baselines do not implement the proposed risk-based approval policy, Declare retrieval, ASP/LTL validation, or compensating-action workflow. Those are the next system increments.
-- The current store is in-memory; state resets when the service exits. SQLite persistence and concurrent stress evaluation remain future implementation tasks.
 
 ## References
 
 [1] V. Fionda, A. Ielo, and F. Ricca, “Are Large Language Models Fluent in Declarative Process Mining?,” in *Proc. 34th Int. Joint Conf. Artificial Intelligence (IJCAI)*, 2025, pp. 4500–4508, doi: 10.24963/ijcai.2025/501.
 
-[2] B. F. van Dongen, “BPI Challenge 2019,” 4TU.ResearchData, 2019, doi: 10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1. [Online]. Available: https://doi.org/10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1. License: CC BY 4.0.
+[2] B. F. van Dongen, “BPI Challenge 2019,” 4TU.ResearchData, 2019, doi: 10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1. [Online]. Available: https://doi.org/10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1.

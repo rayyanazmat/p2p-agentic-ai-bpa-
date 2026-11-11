@@ -1,0 +1,35 @@
+{
+  "project": "Policy-Grounded Agentic AI for Safe Purchase-to-Pay Automation",
+  "phase": "Phase 2",
+  "case_count": 100,
+  "experiments": {
+    "e1_baseline": {
+      "script": "e1_baseline",
+      "stdout": "Saved baseline experiment output to /home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/results/E1_baseline.json"
+    },
+    "e2_base_paper": {
+      "script": "e2_base_paper",
+      "stdout": "Saved explicit base-paper proxy evaluation to /home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/results/E2_base_paper.json"
+    },
+    "e3_proposed_system": {
+      "script": "e3_proposed_system",
+      "stdout": "Saved proposed-system evaluation output to /home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/results/E3_proposed_system.json"
+    },
+    "export_representative_traces": {
+      "script": "export_representative_traces",
+      "stdout": "{\n  \"source_experiment\": \"E3_proposed_system\",\n  \"case_count\": 100,\n  \"end_state_mismatch_count\": 0,\n  \"policy_violation_case_count\": 40,\n  \"policy_violation_category_counts\": {\n    \"three_way_missing_gr\": 20,\n    \"unverified_invoice\": 5,\n    \"duplicate_invoice\": 5,\n    \"amount_mismatch\": 5,\n    \"incomplete_receipt\": 5\n  },\n  \"representative_success_cases\": [\n    \"SYN-001\",\n    \"SYN-002\"\n  ],\n  \"representative_policy_risk_cases\": [\n    \"SYN-041\",\n    \"SYN-081\"\n  ],\n  \"interpretation\": \"Policy-risk cases are reported separately from end-state mismatches. This synthetic benchmark's fault composition must not be interpreted as production failure prevalence.\"\n}"
+    },
+    "e4_gapwise": {
+      "script": "e4_gapwise",
+      "stdout": "Saved BPI transfer experiment to /home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/results/E4_gapwise.json"
+    },
+    "e5_ablation": {
+      "script": "e5_ablation",
+      "stdout": "Saved ablation output to /home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/results/E5_ablation.json"
+    },
+    "e6_efficiency": {
+      "script": "e6_efficiency",
+      "stdout": "Saved measured efficiency and reliability metrics to /home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/results/E6_efficiency.json\nFull baseline capture: /home/cat/Documents/uni/agentic/project/phase1/p2p_agentic_ai/results/E6_efficiency_baseline_run.json"
+    }
+  }
+}
