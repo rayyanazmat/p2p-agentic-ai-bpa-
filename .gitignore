@@ -25,7 +25,9 @@ htmlcov/
 /toDo.md
 /PAPER_READY_OUTLINE.md
 /.env.example
-/docs/
+/docs/final_submission_checklist.md
+/docs/paper_draft.md
+/docs/rubric_compliance_check.md
 /submission/README.md
 
 # Downloaded BPI logs and generated processed data are not committed.
